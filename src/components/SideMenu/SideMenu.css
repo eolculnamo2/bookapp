@@ -1,0 +1,26 @@
+.menu-box{
+    display: inline-block;
+    min-width: 20vw;
+}
+.corner-box{
+    text-align: center;
+    padding: 20px 15px 20px 5px;
+    top: 0;
+    left: 0;
+    background-color: #529179;
+    min-width: 100%;
+    min-height: 8vh;
+    color: white;
+}
+.corner-state-text{
+    margin-top:0;
+    margin-bottom: 0;
+    font-family: 'Baloo Paaji', cursive;
+    font-size: 35px;
+}
+.book-header{
+    margin-left: 10%;
+}
+.subheader{
+    margin-left: 10%;
+}

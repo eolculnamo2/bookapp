@@ -1,0 +1,25 @@
+.search-input{
+    margin-top: 4vh;
+    margin-left: 10vw;
+    min-width: 35vw;
+    background-color: #f2f2f2;
+    outline: none;
+    border: 0;
+    padding: 15px 20px 15px 20px;
+    font-size: 20px;
+}
+.unread-read{
+    margin-left: 10vw;
+    color: #529179;
+    text-decoration: underline;
+    cursor: pointer;
+    display: inline-block;
+}
+.down-arrow{
+    color: black;
+    font-size: 20px;
+    text-decoration: none !important;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: bottom;
+}
