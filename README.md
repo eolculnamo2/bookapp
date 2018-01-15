@@ -26,7 +26,7 @@ authority
 To Do:
 Base Function=>
 1) Finish user authentication/Successfully save user to db. GOOD (Will create frontend when design received)
-2) Set up API response (Goal for 01/11)
+2) Set up API response GOOD
 3) Create component ready to handle search and add books and relevant form data. (finish by End of Day 11/14)
 4) Map selected books according to filters on SideMenu.(Finish by End of Day 11/16)
 Clean Up =>

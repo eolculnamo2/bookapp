@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "amazon-book-lookup": "^1.0.14",
-    "amazon-book-search": "0.0.10",
+    "amazon-book-search-se": "0.0.9",
     "body-parser": "^1.18.2",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.2",
@@ -23,5 +22,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "localhost:3000"
+  "proxy": "http://localhost:3001/"
 }

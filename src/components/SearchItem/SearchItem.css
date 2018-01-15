@@ -1,0 +1,29 @@
+.item-search-box{
+    width: 55vw;
+    margin-left: 10vw;
+    background-color: white;
+    z-index: 2;
+    position: relative;
+}
+.query-image{
+    display: inline-block;
+    width: 15%;
+    margin: 25px;
+}
+.inline-text{
+    margin-top: 5%;
+    vertical-align: top;
+    display: inline-block;
+    width: 65%;
+}
+.add-box{
+    color: white;
+    vertical-align: top;
+    margin-top: 15%;
+    display: inline-block;
+    background-color: #529179;
+    padding: 15px;
+}
+.author-text{
+    color: grey;
+}
