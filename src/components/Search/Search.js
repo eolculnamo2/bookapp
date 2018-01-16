@@ -24,7 +24,18 @@ class Search extends React.Component{
           this.setState({query: search})
           this.runSearch();
       }
+      
   }.bind(this));
+
+  document.getElementById("dimmer").addEventListener("click",()=>{
+    document.getElementById("dimmer").classList.remove('search-on');
+    document.getElementById("searchInput").style.backgroundColor = "#f2f2f2";
+    this.setState({
+        titles: [],
+        authors: [],
+        imageArr: [],
+        query: ""});
+  });
       }
     runSearch(){
         //fetch("https://www.googleapis.com/books/v1/volumes?q="+this.state.query)

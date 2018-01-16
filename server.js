@@ -16,7 +16,7 @@ app.use(express.static('build'));
 app.use('/', authentication);
 app.use('/', manageBooks);
 
-
+/*
 app.get("/query",(req,res)=>{
 
     absse.search('the prince', function(error, result){
@@ -29,7 +29,9 @@ app.get("/query",(req,res)=>{
     }, 1)
     
 })
-  
+  */
+
+
 
 
 app.get("/",(req,res)=>{

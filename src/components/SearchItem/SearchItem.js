@@ -14,9 +14,14 @@ class SearchItem extends React.Component{
                     By {this.props.author}
                     </p>
                 </div>
-                <button className = "add-box">
+                <form className="inline-form" method="POST" action = "/addNewBook">
+                <input type ="hidden" name = "title" value = {this.props.title} />
+                <input type ="hidden" name = "author" value = {this.props.author} />
+                <input type ="hidden" name = "image" value = {this.props.image} />
+                <button type ="submit" className = "add-box">
                 ADD
                 </button>
+                </form>
             </div>
         )
     }

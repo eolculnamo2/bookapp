@@ -21,6 +21,9 @@ var User = new Schema({
     username: String,
     password: String,
     books: Array,
+    categories: Array,
+    recommended: Array,
+    tags: Array,
     authority: Boolean
 })
 

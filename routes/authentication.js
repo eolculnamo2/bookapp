@@ -37,7 +37,10 @@ router.post('/newUser', (req, res)=>{
     User.register(new User({ 
                              username : req.body.username,
                              authority: false,
-                             books: []
+                             books: [],
+                             categories: [],
+                             recommended: [],
+                             tags: []
                              }), req.body.password, (err, account)=>{
         if (err) {
             console.log(err)
@@ -52,6 +55,7 @@ router.post('/newUser', (req, res)=>{
   }
 });
 
+
 //Login
 router.post('/login', passport.authenticate('local'), function(req, res) {
     console.log("Login")
@@ -64,5 +68,36 @@ router.get('/logout',(req,res)=>{
   req.logout();
   res.redirect('/');
 });
+
+//Code Below should be moved during clean up phase to other routes.
+
+router.get("/bookData",(req,res)=>{
+    User.findOne({username: req.user.username},(err,result)=>{
+      console.log(result)
+      res.json(result.books);
+    })
+})
+
+router.post("/addNewBook", (req,res)=>{
+  var newBook = {
+    title: req.body.title,
+    author: req.body.author,
+    image: req.body.image,
+    read: false,
+    categories: [],
+    tags: [],
+    recommendedBy: "",
+    amazonURL: "",
+    audibleURL: "",
+    rating: 0
+  }
+  User.findOneAndUpdate({username: req.user.username},{$push: {books: newBook}},{new: true},(err,result)=>{
+    console.log("updated "+req.user.username);
+    res.redirect("/");
+  })
+})
+
+
+
 
 module.exports = router;

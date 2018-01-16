@@ -23,3 +23,9 @@ SearchIndex=Books
     Optimal use will stop the foreach functions after the limit, but this may not be possible.
     May want to try for loop instead.
 */
+
+
+Wlll need to add error handling.
+
+Plan Forward:
+=> Saves Twice => Once when add, Again when checkmark is clicked.

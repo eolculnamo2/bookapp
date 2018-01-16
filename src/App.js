@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SideMenu from './components/SideMenu/SideMenu.js';
 import Search from './components/Search/Search.js';
 import LoginScreen from './components/LoginScreen/LoginScreen.js';
+import MyBook from './components/MyBook/MyBook.js';
 import './App.css';
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
         <SideMenu/>
         <div className="right-side">
         <Search/>
+        <MyBook/>
           </div>
       </div>
     );
@@ -36,6 +38,7 @@ class App extends Component {
         <SideMenu/>
         <div className="right-side">
         <Search/>
+
           </div>
       </div>
     );

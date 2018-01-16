@@ -1,21 +1,16 @@
 var express = require('express');
 var books = require('google-books-search');
 var app = express();
+var User = require('../models/User');
+var Book = require('../models/Book');
 var router = express.Router();
+var bodyParser = require('body-parser');
 var authentication = require('./authentication');
 
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({extended: true}));
 router.use(express.static('build'));
 
-router.get('/search', (req,res)=>{
-    console.log("EWF")
-    books.search('Professional JavaScript for Web Developers', function(error, results) {
-        if ( ! error ) {
-            console.log("Successful query");
-        } else {
-            console.log(error);
-        }
-    });
-    
-})
+
 
 module.exports = router;
