@@ -1,0 +1,60 @@
+.mybook-box{
+    margin-left: 5%;
+    margin-top: 5%;
+    width: 70vw;
+}
+.mybook-child-box{
+    padding: 10px;
+    margin-top: 5%;
+    border-left: 2px solid #f2f2f2;
+    border-right: 2px solid #f2f2f2;
+    border-bottom: 4px solid #f2f2f2;
+}
+.my-image{
+    display: inline-block;
+    width: 15%;
+}
+.my-book-info{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 5%;
+    width: 25vw;
+}
+.organized-by{
+    margin: 5px;
+    font-weight: normal;
+    display: inline-block;
+    font-size: 15px;
+}
+.listed-organized-by{
+    color: #529179;
+    margin: 5px;
+    display: inline-block;
+    font-size: 15px;
+}
+.author{
+    margin: 5px;
+    color: #606060;
+}
+.read-or-stars{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 7%;
+    margin-left: 23%;
+}
+.book-link{
+    color: #529179;
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 5%;
+}
+.mark-button{
+    cursor: pointer;
+    background-color: #529179;
+    padding: 10px 20px 10px 20px;
+    color: white;
+    font-size: 15px;
+}
+.hr-divider{
+    border: 1px solid #f2f2f2;
+}

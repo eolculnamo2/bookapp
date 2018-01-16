@@ -1,6 +1,6 @@
 .search-input{
     margin-top: 4vh;
-    margin-left: 10vw;
+    margin-left: 5vw;
     position: relative;
     min-width: 35vw;
     background-color: #f2f2f2;
@@ -11,7 +11,7 @@
     z-index: 2
 }
 .unread-read{
-    margin-left: 10vw;
+    margin-left: 5vw;
     color: #529179;
     text-decoration: underline;
     cursor: pointer;
