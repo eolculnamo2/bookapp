@@ -17,10 +17,7 @@
     "react-scripts": "1.0.17"
   },
   "scripts": {
-    "start": "react-scripts start && node server",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "proxy": "http://localhost:3001/"
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+  }
 }

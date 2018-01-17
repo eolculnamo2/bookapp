@@ -41,7 +41,7 @@ app.get("/hi",(req,res)=>{
     res.send("Working")
 })
 
-app.listen(3001, ()=>{
+app.listen(process.env.PORT || 5000, ()=>{
     console.log('Listening...');
 })
 
