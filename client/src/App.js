@@ -16,7 +16,7 @@ class App extends Component {
   home(){
     return (
       <div>
-      <button onClick = {()=>{this.setState({login: true})}} class = "login-button">
+      <button onClick = {()=>{this.setState({login: true})}} className = "login-button">
       Login
     </button>
         <SideMenu/>

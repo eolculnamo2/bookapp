@@ -97,7 +97,7 @@ class MyBook extends React.Component{
                                         </h4>      
                                             {this.state.tags[i].map((x)=>{
                                                 var tester;
-                                                alert(x)
+                                               
                                                 if(x === ""){
                                                     tester = "no tag";
                                                 }
