@@ -12,7 +12,7 @@ var absse =  new amazonBookSearchSE({ awsKey: "AKIAJJE5WUM7ZO5XQ6NQ", awsSecret:
 var authentication = require('./routes/authentication');
 var manageBooks = require('./routes/manageBooks');
 
-app.use(express.static('build'));
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use('/', authentication);
 app.use('/', manageBooks);
 
