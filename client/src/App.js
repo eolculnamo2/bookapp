@@ -9,16 +9,18 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      login: false
+      login: true
     }
   }
-  //default screen
+  //Home Screen
   home(){
     return (
       <div>
-      <button onClick = {()=>{this.setState({login: true})}} className = "login-button">
-      Login
-    </button>
+        <form method = "POST" action = "/logout">
+      <button type = "submit" className = "login-button">
+         Logout
+         </button>
+      </form>
         <SideMenu/>
         <div className="right-side">
         <Search/>
@@ -27,19 +29,11 @@ class App extends Component {
       </div>
     );
   }
+  //renders login screen and uses unverified and verified to receive callbacks from fetch in loginscreen.js
   login(){
-    //Will include login screen.. LOGIN SCREEN WILL CHANGE AND BE FIRST SCREEN VIEWED BEFORE UI.
     return (
       <div>
-        <LoginScreen/>
-      <button class = "login-button">
-      Login
-    </button>
-        <SideMenu/>
-        <div className="right-side">
-        <Search/>
-
-          </div>
+        <LoginScreen unverified = {()=>{this.setState({login: true})}} verified = {()=>{this.setState({login: false})}}/>
       </div>
     );
   }

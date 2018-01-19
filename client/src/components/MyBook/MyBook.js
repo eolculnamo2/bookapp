@@ -29,6 +29,7 @@ class MyBook extends React.Component{
             return response.json();
         })
         .then((data)=>{
+            console.log("data started...")
             var authorHold = []
             var titlesHold = []
             var imagesHold = []

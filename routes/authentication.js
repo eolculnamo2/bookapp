@@ -63,11 +63,23 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 });
 
 //Logout
-router.get('/logout',(req,res)=>{
+router.post('/logout',(req,res)=>{
     console.log("Logout")
   req.logout();
   res.redirect('/');
 });
+
+router.get('/checkLogin',(req,res)=>{
+  console.log("Checking Login")
+  if(req.user){
+    console.log("Logged In")
+    res.json([{verified: true}])
+  }
+  else if(!req.user){
+    console.log("Not logged in")
+    res.json([{verified: false}])
+  }
+})
 
 //Code Below should be moved during clean up phase to other routes.
 

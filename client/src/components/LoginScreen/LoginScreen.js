@@ -1,68 +1,97 @@
 import React from 'react';
 import './LoginScreen.css';
 
+//Houses both login and registration. The two options
+//are controlled by the boolean login state.
+
+
 class LoginScreen extends React.Component{
     constructor(){
         super()
-        this.state={
-            login: true
+        this.state = {
+            registration: false
         }
     }
-    login(){
+    componentDidMount(){
+        fetch("/checkLogin",
+        {
+            method: "get",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Cache': 'no-cache'
+              },
+              credentials: 'same-origin'
+        })
+        .then((response)=>{
+            return response.json();
+        })
+        .then((data)=>{
+            console.log("checking login data")
+            console.log(data[0].verified)
+            if(data[0].verified){
+                console.log("!")
+                this.props.verified();
+            }
+            else if(!data[0].verified){
+                this.props.unverified()
+            }
+        })
+    }
+    credentials(){
         return(
-            <div className = "login-box">
-                <div className = "login-area">
-                <h2 className = "login-text">
-                    Login to your Account
-                    </h2>
-                    <form method = "POST" action = "/login">
-                    Username<br/>
-                    <input name = "username"/><br/>
-                    Password<br/>
-                    <input name = "password"/><br/>
-                    <button type = "button" className="login-button">
-                        Back!
-                        </button>
-                    <button type = "submit" className="login-button">
+            <div>
+                <form method = "POST" action = "/login">
+                    <h4>
                         Login
-                        </button><br/>
-                        <a onClick = {()=>{this.setState({login: false})}} className = "login-text">New Account</a>
-                        </form>
-                    </div>
+                        </h4>
+                    <input name = "username"/><br/>
+                    <h4>
+                        Password
+                        </h4>
+                    <input name = "password" type = "password"/><br/>
+                    <button type = "button" onClick = {()=>{this.setState({registration: true})}}>
+                        New User
+                        </button>
+                    <button type = "submit">
+                        Login
+                        </button>
+                    </form>
                 </div>
         )
     }
-    newUser(){
+    register(){
         return(
-            <div className = "login-box">
-                <div className = "login-area">
-                <h2 className = "login-text">
-                    Create your Account
-                    </h2>
-                    <form method = "POST" action = "/newUser">
-                    Username<br/>
+            <div>
+                <form method = "POST" action = "/newUser">
+                    <h4>
+                        Login
+                        </h4>
                     <input name = "username"/><br/>
-                    Password<br/>
-                    <input type = "password" name = "password"/><br/>
-                    Confirm Password<br/>
-                    <input type = "password" name = "confirmPassword"/><br/>
-                    <button onClick = {()=>{this.setState({login: true})}} type = "button" className="login-button">
-                        Back
-                        </button>
-                    <button type = "submit" className="login-button">
-                        Create
-                        </button>
-                        </form>
-                    </div>
+                    <h4>
+                        Password
+                        </h4>
+                    <input name = "password" type = "password"/><br/>
+                    <h4>
+                        Confirm Password
+                        </h4>
+                        <input name = "confirmPassword" type = "password"/><br/>
+                        <button type = "button" onClick = {()=>{this.setState({registration: false})}}>
+                            Back
+                            </button>
+                        <button type = "submit">
+                            Register
+                            </button>
+                    </form>
                 </div>
         )
     }
     render(){
-        if(this.state.login){
-            return this.login()
+        if(!this.state.registration){
+            return this.credentials();
         }
-        else if(!this.state.login){
-            return this.newUser()
+        else if(this.state.registration){
+            return this.register();
         }
     }
 }
