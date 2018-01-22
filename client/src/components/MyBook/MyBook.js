@@ -10,7 +10,8 @@ class MyBook extends React.Component{
             images: [],
             categories: [],
             recommendedBy: [],
-            tags: []
+            tags: [],
+            ifRead: []
 
         }
     }
@@ -29,18 +30,19 @@ class MyBook extends React.Component{
             return response.json();
         })
         .then((data)=>{
-            console.log("data started...")
             var authorHold = []
             var titlesHold = []
             var imagesHold = []
             var recommendedByHold = []
             var categoriesHold = []
             var tagsHold = []
+            var ifReadHold = []
 
             data.forEach((x,i)=>{
                 authorHold.push(x.author)
                 titlesHold.push(x.title)
                 imagesHold.push(x.image)
+                ifReadHold.push(x.read)
                 if(x.recommendedBy.length === 0){
                     recommendedByHold.push("n/a")
                 }
@@ -51,16 +53,46 @@ class MyBook extends React.Component{
                 tagsHold.push(x.tags)
                 
             })
+            
             this.setState({
                 authors: authorHold,
                 titles: titlesHold,
                 images: imagesHold,
                 recommendedBy: recommendedByHold,
                 categories: categoriesHold,
-                tags: tagsHold
+                tags: tagsHold,
+                ifRead: ifReadHold
             })
         })
         
+    }
+    markOrRate(x,index){
+        // The form data for rating is going to be a pain in the ass.
+        if(x){
+            return(
+                <div>
+                    <form id ="submitRate" method = "POST" action = {"/rate"+index}>
+                    <center>
+                    <p className = "marked"> Marked as Read</p>
+                    <div className ="rating">
+<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+</div>
+</center>
+                        </form>
+                    </div>
+            )
+        }
+        else if(!x){
+            return(
+            <div>
+            <form method = "POST" action = {"/markRead"+index}>
+                <button className = "mark-button">
+                    Mark as Read
+                     </button>
+                </form>
+                </div>
+            )
+        }
     }
     render(){
         return(
@@ -113,9 +145,7 @@ class MyBook extends React.Component{
                                    </div>
 
                             <div className = "read-or-stars"> 
-                                <button className = "mark-button">
-                                    Mark as Read
-                                    </button><br/>
+                                {this.markOrRate(this.state.ifRead[i], i)}<br/>
                                     <p className = "book-link">
                                         Audible
                                         </p>

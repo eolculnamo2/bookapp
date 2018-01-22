@@ -9,6 +9,8 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
+      // in order to keep login from flashing after each update, will need a fetch request
+      // to know whether or not user is logged in. This will dictate if login is set to true or false
       login: true
     }
   }

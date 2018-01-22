@@ -41,6 +41,8 @@ class LoginScreen extends React.Component{
     credentials(){
         return(
             <div>
+                <center>
+            <div className = "cred-box">
                 <form method = "POST" action = "/login">
                     <h4>
                         Login
@@ -50,19 +52,23 @@ class LoginScreen extends React.Component{
                         Password
                         </h4>
                     <input name = "password" type = "password"/><br/>
-                    <button type = "button" onClick = {()=>{this.setState({registration: true})}}>
+                    <button className = "cred-button" type = "button" onClick = {()=>{this.setState({registration: true})}}>
                         New User
                         </button>
-                    <button type = "submit">
+                    <button className = "cred-button" type = "submit">
                         Login
                         </button>
                     </form>
                 </div>
+                </center>
+            </div>
         )
     }
     register(){
         return(
-            <div>
+        <div>
+            <center>
+            <div className = "cred-box">
                 <form method = "POST" action = "/newUser">
                     <h4>
                         Login
@@ -76,14 +82,16 @@ class LoginScreen extends React.Component{
                         Confirm Password
                         </h4>
                         <input name = "confirmPassword" type = "password"/><br/>
-                        <button type = "button" onClick = {()=>{this.setState({registration: false})}}>
+                        <button className = "cred-button" type = "button" onClick = {()=>{this.setState({registration: false})}}>
                             Back
                             </button>
-                        <button type = "submit">
+                        <button className = "cred-button" type = "submit">
                             Register
                             </button>
                     </form>
                 </div>
+                </center>
+            </div>
         )
     }
     render(){

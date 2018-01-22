@@ -90,6 +90,23 @@ router.get("/bookData",(req,res)=>{
     })
 })
 
+router.post("/markRead:str",(req,res)=>{
+   var index = req.params.str;
+  User.findOne({username: req.user.username}, (err,response)=>{
+    var updater = response.books
+    updater[index].read = true;
+
+    User.findOneAndUpdate({username: req.user.username}, {$set: {books: updater}},(err,response2)=>{
+      if (err){
+        throw err;
+      }
+      else{
+        res.redirect("/")
+      }
+    })
+  })
+})
+
 router.post("/addNewBook", (req,res)=>{
   var newBook = {
     title: req.body.title,

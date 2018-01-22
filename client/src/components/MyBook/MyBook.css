@@ -58,3 +58,22 @@
 .hr-divider{
     border: 1px solid #f2f2f2;
 }
+.marked{
+    color: #b2b2b2;
+    font-size: 13px;
+}
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    cursor: pointer;
+  }
+  .rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+  }
+  .rating > span:hover:before,
+  .rating > span:hover ~ span:before {
+     content: "\2605";
+     position: absolute;
+  }
