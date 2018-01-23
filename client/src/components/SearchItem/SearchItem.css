@@ -17,6 +17,8 @@
     width: 65%;
 }
 .add-box{
+    vertical-align: top;
+    margin-top: 6%;
     color: white;
     display: inline-block;
     background-color: #529179;
@@ -28,5 +30,28 @@
 .inline-form{
     vertical-align: top;
     margin-top: 15%;
+    display: inline-block;
+}
+.checkmark{
+    color: #529179;
+    font-size: 20px;
+    border: 0px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5%;
+}
+.in-library{
+    color: #529179;
+    font-size: 12px;
+    border: 0px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 15%;
+    margin-left: -2%;
+    outline: 0;
+}
+.filters{
+    margin-top: 0;
+    margin-left: 5%;
     display: inline-block;
 }

@@ -85,8 +85,12 @@ router.get('/checkLogin',(req,res)=>{
 
 router.get("/bookData",(req,res)=>{
     User.findOne({username: req.user.username},(err,result)=>{
-      console.log(result)
       res.json(result.books);
+    })
+})
+router.get("/userData",(req,res)=>{
+    User.findOne({username: req.user.username}, (err,result)=>{
+      res.json(result);
     })
 })
 
@@ -107,20 +111,35 @@ router.post("/markRead:str",(req,res)=>{
   })
 })
 
+
+//Add book and initial filters. Will need separate route for adding/deleting new filters
 router.post("/addNewBook", (req,res)=>{
+  var importedCat = []
+  var importedTags = []
+  var importedRecommendedBy = []
+  if(req.body.category != null){
+    importedCat.push(req.body.category); 
+  }
+  if(req.body.tags != null){
+    importedTags = req.body.tags;
+  }
+  if(req.body.recommendedBy != null){
+    importedRecommendedBy = req.body.recommendedBy;
+  }
+  
   var newBook = {
     title: req.body.title,
     author: req.body.author,
     image: req.body.image,
     read: false,
-    categories: [],
+    categories: importedCat,
     tags: [],
     recommendedBy: "",
     amazonURL: "",
     audibleURL: "",
     rating: 0
   }
-  User.findOneAndUpdate({username: req.user.username},{$push: {books: newBook}},{new: true},(err,result)=>{
+  User.findOneAndUpdate({username: req.user.username},{$push: {books: newBook, categories: importedCat, tags: importedTags, recommended: importedRecommendedBy}},{new: true},(err,result)=>{
     console.log("updated "+req.user.username);
     res.redirect("/");
   })

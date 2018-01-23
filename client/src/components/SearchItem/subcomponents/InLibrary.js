@@ -1,10 +1,13 @@
 import React from 'react';
 import '../SearchItem.css';
 
-class NotAdded extends React.Component{
-    handleCallback(){
-        this.props.changeStatus("adding")
-    }
+class InLibrary extends React.Component{
+    //Utlimately, the in library component will be a button that will link
+    //to Adding to make adjustments to filters.
+
+    // In Library should also keep user from adding same book twice.
+
+    //Currently checks by image match in fetch request. At some point should be updated to book ID
     render(){
         return(
             <div className = "item-search-box">
@@ -17,13 +20,13 @@ class NotAdded extends React.Component{
                         By {this.props.author}
                         </p>
                     </div>
-                    <button onClick = {this.handleCallback.bind(this)} className = "add-box">
-                        ADD
+                    <button className = "in-library">
+                        IN LIBRARY
                         </button>
                     
                 </div>
-            )
+        )
     }
 }
 
-export default NotAdded;
+export default InLibrary;
