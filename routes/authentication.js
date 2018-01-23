@@ -117,14 +117,16 @@ router.post("/addNewBook", (req,res)=>{
   var importedCat = []
   var importedTags = []
   var importedRecommendedBy = []
+  var importedRecommendedByString = ""
   if(req.body.category != null){
     importedCat.push(req.body.category); 
   }
   if(req.body.tags != null){
-    importedTags = req.body.tags;
+    importedTags.push(req.body.tags);
   }
   if(req.body.recommendedBy != null){
-    importedRecommendedBy = req.body.recommendedBy;
+    importedRecommendedBy.push(req.body.recommendedBy);
+    importedRecommendedByString = req.body.recommendedBy;
   }
   
   var newBook = {
@@ -133,14 +135,14 @@ router.post("/addNewBook", (req,res)=>{
     image: req.body.image,
     read: false,
     categories: importedCat,
-    tags: [],
-    recommendedBy: "",
+    tags: importedTags,
+    recommendedBy: importedRecommendedByString,
     amazonURL: "",
     audibleURL: "",
     rating: 0
   }
   User.findOneAndUpdate({username: req.user.username},{$push: {books: newBook, categories: importedCat, tags: importedTags, recommended: importedRecommendedBy}},{new: true},(err,result)=>{
-    console.log("updated "+req.user.username);
+    console.log("updated "+req.user.username+" recs "+ importedTags + " tags " + importedRecommendedBy);
     res.redirect("/");
   })
 })

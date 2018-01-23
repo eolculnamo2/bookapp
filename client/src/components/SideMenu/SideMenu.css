@@ -26,3 +26,8 @@
 .subheader{
     margin-left: 10%;
 }
+.item{
+    color:#529179;
+    margin-left: 10%; 
+    cursor: pointer;
+}

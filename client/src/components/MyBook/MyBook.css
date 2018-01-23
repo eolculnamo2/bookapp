@@ -55,6 +55,9 @@
     color: white;
     font-size: 15px;
 }
+#submitRate{
+    width: 125px;
+}
 .hr-divider{
     border: 1px solid #f2f2f2;
 }

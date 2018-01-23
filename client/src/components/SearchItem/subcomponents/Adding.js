@@ -1,6 +1,8 @@
 import React from 'react';
 import '../SearchItem.css';
 
+//In clean up phase, more than one filter will be selectable with a css dropdown.
+
 class Adding extends React.Component{
     constructor(){
         super()
@@ -31,12 +33,12 @@ class Adding extends React.Component{
         })
         .then((data)=>{
             //STOPPING POINT FOR NIGHT 
-            alert(JSON.stringify(data))
             data.categories.forEach((x)=>{
                 x.forEach((y)=>{
                     var checker = true;
                     this.state.existingCategories.forEach((z)=>{
                         if(y == z){
+                            
                             checker = false;
                         }
                     })
@@ -47,8 +49,41 @@ class Adding extends React.Component{
                     }
                 }) 
             })
+            //End Categories
+            data.tags.forEach((x)=>{
+                x.forEach((y)=>{
+                    var checker = true;
+                    this.state.existingTags.forEach((z)=>{
+                        if(y == z){
+                            
+                            checker = false;
+                        }
+                    })
+                    if(checker){
+                        var update = this.state.existingTags
+                        update.push(y)
+                        this.setState({existingTags: update})
+                    }
+                }) 
+            })
+            //End Tags
+            data.recommended.forEach((x)=>{
+                x.forEach((y)=>{
+                    var checker = true;
+                    this.state.existingRecommended.forEach((z)=>{
+                        if(y == z){
+                            
+                            checker = false;
+                        }
+                    })
+                    if(checker){
+                        var update = this.state.existingRecommended
+                        update.push(y)
+                        this.setState({existingRecommended: update})
+                    }
+                }) 
+            })
         })
-        alert("existing..."+this.state.existingCategories)
     }
     newCategory(){
         /* newCategory comes from the select tags onChange event. 
@@ -67,6 +102,32 @@ class Adding extends React.Component{
         }
         
     }
+    newRecommended(){
+        var selectedCategory = document.getElementById("newRec").value;
+        if(selectedCategory == "new-recommended"){
+            var newRec = prompt("Who Recommended this Book?")
+            var currentRec = this.state.newRecommended
+            currentRec.push(newRec)
+            this.setState({newRecommended: currentRec})
+        }
+        else{
+            this.setState({newRecommended: selectedCategory})
+        }
+        
+    }
+    newTags(){
+        var selectedCategory = document.getElementById("newTag").value;
+        if(selectedCategory == "new-tag"){
+            var newTag = prompt("Enter New Tag")
+            var currentTag = this.state.newTags
+            currentTag.push(newTag)
+            this.setState({newTags: currentTag})
+        }
+        else{
+            this.setState({newTags: selectedCategory})
+        }
+        
+    }
     render(){
         return(
             <div className = "item-search-box">
@@ -78,32 +139,41 @@ class Adding extends React.Component{
                 <select onChange = {this.newCategory.bind(this)} id = "newCat" className = "filters">
                 <option>
                     </option>
+                    {this.state.existingCategories.map((x)=>{
+                        return(<option value = {x}>{x}</option>)
+                    })}
                     <option value = "new-category" onSelect = {this.newCategory.bind(this)}>
                         New Category
                         </option>
                     </select>
                     <br/>
+                    
                     <h4 className = "filters">
                 Recommended By
                 </h4>
-                <select className = "filters">
-                    <option>
-                        a
-                        </option>
-                    <option>
-                        b
+                <select onChange = {this.newRecommended.bind(this)} id = "newRec" className = "filters">
+                <option>
+                    </option>
+                    {this.state.existingRecommended.map((x)=>{
+                        return(<option value = {x}>{x}</option>)
+                    })}
+                    <option value = "new-recommended" onSelect = {this.newCategory.bind(this)}>
+                        Add New
                         </option>
                     </select>
                     <br/>
+                    
                     <h4 className = "filters">
-                Tags
-                </h4>
-                <select className = "filters">
-                    <option>
-                        a
-                        </option>
-                    <option>
-                        b
+                        Tags
+                        </h4>
+                    <select onChange = {this.newTags.bind(this)} id = "newTag" className = "filters">
+                <option>
+                    </option>
+                    {this.state.existingTags.map((x)=>{
+                        return(<option value = {x}>{x}</option>)
+                    })}
+                    <option value = "new-tag" onSelect = {this.newCategory.bind(this)}>
+                        New Tag
                         </option>
                     </select>
                     <br/>
@@ -113,6 +183,8 @@ class Adding extends React.Component{
                     <input type ="hidden" name = "author" value = {this.props.author} />
                     <input type ="hidden" name = "image" value = {this.props.image} />
                     <input type = "hidden" name = "category" value = {this.state.category}/>
+                    <input type = "hidden" name = "recommendedBy" value = {this.state.newRecommended}/>
+                    <input type = "hidden" name = "tags" value = {this.state.newTags}/>
                     <button type ="submit" className = "checkmark">
                     &#10004;
                     </button>
