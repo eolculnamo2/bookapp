@@ -30,7 +30,7 @@ class Adding extends React.Component{
             return response.json();
         })
         .then((data)=>{
-            //STOPPING POINT FOR NIGHT
+            //STOPPING POINT FOR NIGHT 
             alert(JSON.stringify(data))
             data.categories.forEach((x)=>{
                 x.forEach((y)=>{
