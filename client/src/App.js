@@ -5,14 +5,49 @@ import LoginScreen from './components/LoginScreen/LoginScreen.js';
 import MyBook from './components/MyBook/MyBook.js';
 import './App.css';
 
+/*
+The Filtering system can be a bit complex. Essentially, it uses callbacks between states and props
+to communicate data from SideMenu.js to App.js's state which sends via props to MyBook.js to filter
+in the render section with a series of if statements. (props enter via componenetWillReceiveProps())
+*/
+
 class App extends Component {
   constructor(){
     super()
     this.state = {
       // in order to keep login from flashing after each update, will need a fetch request
       // to know whether or not user is logged in. This will dictate if login is set to true or false
-      login: true
+      login: true,
+      catFilter: [],
+      tagFilter: [],
+      recFilter: []
     }
+    this.filters = this.filters.bind(this);
+    this.clearFilters = this.clearFilters.bind(this)
+  }
+  filters(type, name){
+    if(type === "catSend"){
+      var x = this.state.catFilter
+      x.push(name);
+      this.setState({catFilter: x})
+    }
+    else if(type === "recSend"){
+      var x = this.state.recFilter
+      x.push(name);
+      this.setState({recFilter: x})
+    }
+    else if(type === "tagSend"){
+      var x = this.state.tagFilter
+      x.push(name);
+      this.setState({tagFilter: x})
+    }
+  }
+  clearFilters(){
+    this.setState({
+      catFilter:[],
+      tagFilter:[],
+      recFilter:[]
+    })
   }
   //Home Screen
   home(){
@@ -23,10 +58,12 @@ class App extends Component {
          Logout
          </button>
       </form>
-        <SideMenu/>
+        <SideMenu clearFilters = {this.clearFilters} filter = {this.filters} />
         <div className="right-side">
         <Search/>
-        <MyBook/>
+        <MyBook catFilter = {this.state.catFilter}
+                tagFilter = {this.state.tagFilter}
+                recFilter = {this.state.recFilter}/>
           </div>
       </div>
     );

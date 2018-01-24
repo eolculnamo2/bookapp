@@ -78,6 +78,13 @@ class SideMenu extends React.Component{
             })
         })
     }
+    handleFilterCallback(e){
+        this.props.filter(e.target.id, e.target.innerHTML);
+    }
+    handleClearFilter(){
+       
+        this.props.clearFilters();
+    }
     render(){
         return(
         <div className = "menu-box">
@@ -95,20 +102,21 @@ class SideMenu extends React.Component{
                 Categories
                     </h4>
                     {this.state.categories.map((x)=>{
-                        return(<p className = "item">{x}</p>)
+                        return(<p id = "catSend" onClick = {this.handleFilterCallback.bind(this)} className = "item">{x}</p>)
                     })}
                 <h4 className = "subheader">
                 Recommended By
                     </h4>
                     {this.state.recommendedBy.map((x)=>{
-                        return(<p className = "item">{x}</p>)
+                        return(<p id = "recSend" onClick = {this.handleFilterCallback.bind(this)} className = "item">{x}</p>)
                     })}
                 <h4 className = "subheader">
                 Tags
                     </h4>
                     {this.state.tags.map((x)=>{
-                        return(<p className = "item">{x}</p>)
+                        return(<p id = "tagSend" onClick = {this.handleFilterCallback.bind(this)} className = "item">{x}</p>)
                     })}
+                    <p className = "clear-filters" onClick = {this.handleClearFilter.bind(this)}>clear filters</p>
 
             </div>
         )
