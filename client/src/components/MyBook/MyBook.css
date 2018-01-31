@@ -1,3 +1,97 @@
+
+ @media screen and (max-width: 1079px){
+    .mybook-box{
+        margin-top: 5%;
+        display: block;
+        margin-left: 10%;
+        width: 80vw;
+    }
+    
+    .mybook-child-box{
+        min-width:300px;
+        margin: 40px;
+        padding: 10px;
+        margin-top: 5%;
+        display: block;
+        margin: auto;
+        border-left: 2px solid #f2f2f2;
+        border-right: 2px solid #f2f2f2;
+        border-bottom: 4px solid #f2f2f2;
+    }
+    
+    .my-image{
+        display: block;
+        margin: auto;
+        width: 25%;
+    }
+    
+    .organized-by{
+        margin: 5px;
+        font-weight: normal;
+        display: inline-block;
+        font-size: 15px;
+    }
+
+    .listed-organized-by{
+        color: #529179;
+        margin: 5px;
+        display: inline-block;
+        font-size: 15px;
+    }
+
+    .my-book-info{
+        vertical-align: top;
+        margin: auto;
+        width: 100%;
+        text-align: center;
+    }
+    .mark-button{
+        cursor: pointer;
+        background-color: #529179;
+        padding: 10px 20px 10px 20px;
+        color: white;
+        font-size: 15px;
+        display: block;
+        margin: auto;
+    }
+    .marked{
+        color: #b2b2b2;
+        font-size: 13px;
+    }
+    .book-link{
+        color: #529179;
+        cursor: pointer;
+        display: inline-block;
+        margin-left: 5px;
+    }
+    .rating {
+        unicode-bidi: bidi-override;
+        direction: rtl;
+        cursor: pointer;
+      }
+      .rating > span {
+        display: inline-block;
+        position: relative;
+        width: 1.1em;
+      }
+      .rating > span:hover:before,
+      .rating > span:hover ~ span:before {
+         content: "\2605";
+         position: absolute;
+      }
+
+      .hr-divider{
+        width: 75%;
+        border: 1px solid #f2f2f2;
+    }
+    .read-or-stars{
+        margin: auto;
+        text-align: center;
+    }
+    
+}  
+
+@media screen and (min-width: 1080px){
 .mybook-box{
     margin-left: 5%;
     margin-top: 5%;
@@ -5,7 +99,7 @@
    
 }
 .mybook-child-box{
-    min-width:500px;
+    min-width:300px;
     padding: 10px;
     margin-top: 5%;
     border-left: 2px solid #f2f2f2;
@@ -82,3 +176,4 @@
      content: "\2605";
      position: absolute;
   }
+}

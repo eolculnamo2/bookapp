@@ -1,6 +1,23 @@
+.hide-if-mobile{
+    display: none;
+}
+.corner-box{
+    text-align: center;
+    padding: 20px 15px 20px 5px;
+    top: 0;
+    left: 0;
+    background-color: #529179;
+    min-width: 100%;
+    min-height: 8vh;
+    color: white;
+}
+@media screen and (min-width: 1080px){
+.hide-if-mobile{
+    display: inline-block;
+}
 .menu-box{
     display: inline-block;
-    min-width: 20vw;
+    min-width: 10vw;
     padding-right: 20px;
 }
 .corner-box{
@@ -18,7 +35,7 @@
     margin-top:0;
     margin-bottom: 0;
     font-family: 'Baloo Paaji', cursive;
-    font-size: 35px;
+    font-size: 25px;
 }
 .book-header{
     margin-left: 10%;
@@ -36,4 +53,5 @@
     color: #b2b2b2;
     font-size: 11px;
     margin-left: 10%;
+}
 }

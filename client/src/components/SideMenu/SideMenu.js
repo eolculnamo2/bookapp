@@ -94,7 +94,7 @@ class SideMenu extends React.Component{
                     Recommended
                     </h2>
                 </div>
-
+            <div className = "hide-if-mobile">
                 <h1 className = "book-header">
                 Books
                     </h1>
@@ -117,7 +117,7 @@ class SideMenu extends React.Component{
                         return(<p id = "tagSend" onClick = {this.handleFilterCallback.bind(this)} className = "item">{x}</p>)
                     })}
                     <p className = "clear-filters" onClick = {this.handleClearFilter.bind(this)}>clear filters</p>
-
+                    </div>
             </div>
         )
     }

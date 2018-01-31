@@ -20,6 +20,12 @@ class MyBook extends React.Component{
         }
     }
     componentDidMount(){
+
+        //Will try to make star rating form by adding hidden input whose value
+        //matches the clicked star.
+        if(document.getElementsByClassName("rating")[0] != undefined){
+            document.getElementsByClassName("rating")[0].style.content = "2605";
+        }
       fetch("/bookData",
         {
             method: "get",
@@ -168,6 +174,7 @@ class MyBook extends React.Component{
                              <p className = "book-link">
                              Amazon
                              </p>
+                             
                      </div>
                 </div>
         )
