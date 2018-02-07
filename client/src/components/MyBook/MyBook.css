@@ -75,7 +75,7 @@
         width: 1.1em;
       }
       .rating > span:hover:before,
-      .rating > span:hover ~ span:before {
+      .rating > span:hover ~ span:before{
          content: "\2605";
          position: absolute;
       }
@@ -137,12 +137,13 @@
     vertical-align: top;
     margin-top: 7%;
     margin-left: 23%;
+    min-width: 125px;
 }
 .book-link{
     color: #529179;
     cursor: pointer;
     display: inline-block;
-    margin-left: 5%;
+    padding-left: 3%;
 }
 .mark-button{
     cursor: pointer;

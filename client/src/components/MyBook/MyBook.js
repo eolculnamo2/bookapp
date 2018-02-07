@@ -4,6 +4,7 @@ import './MyBook.css';
 class MyBook extends React.Component{
     constructor(){
         super()
+        //Caution: Do not confuse ratings and rating.
         this.state = {
             authors: [],
             titles: [],
@@ -12,20 +13,17 @@ class MyBook extends React.Component{
             recommendedBy: [],
             tags: [],
             ifRead: [],
+            ratings: [],
             filter: false,
             catFilter: [],
             recFilter: [],
-            tagFilter: []
+            tagFilter: [],
+            rating: 0
 
         }
     }
     componentDidMount(){
 
-        //Will try to make star rating form by adding hidden input whose value
-        //matches the clicked star.
-        if(document.getElementsByClassName("rating")[0] != undefined){
-            document.getElementsByClassName("rating")[0].style.content = "2605";
-        }
       fetch("/bookData",
         {
             method: "get",
@@ -47,12 +45,14 @@ class MyBook extends React.Component{
             var categoriesHold = []
             var tagsHold = []
             var ifReadHold = []
+            var ratingsHold = []
 
             data.forEach((x,i)=>{
                 authorHold.push(x.author)
                 titlesHold.push(x.title)
                 imagesHold.push(x.image)
                 ifReadHold.push(x.read)
+                ratingsHold.push(x.rating);
                 if(x.recommendedBy.length === 0){
                     recommendedByHold.push("n/a")
                 }
@@ -71,9 +71,49 @@ class MyBook extends React.Component{
                 recommendedBy: recommendedByHold,
                 categories: categoriesHold,
                 tags: tagsHold,
-                ifRead: ifReadHold
+                ifRead: ifReadHold,
+                ratings: ratingsHold
+            },()=>{
+                //sets star rating from fetch request
+           
+               this.state.ratings.forEach((r,i)=>{
+                   if(r>0){
+                    for(var j = 5-r; j < 5; j++){
+                     
+     document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating span")[j].innerHTML = "&#x2605";
+                    }
+                   }
+               })
+            
+        
+            // Adds mouse over event to star rating which clears out current rating
+               var rateClass = document.getElementsByClassName("rating");
+            for(var i = 0; i < rateClass.length;i++){
+                rateClass[i].addEventListener("mouseover",(e)=>{
+                    for(var j = 0; j < 5; j++){
+                        e.currentTarget.querySelectorAll("span")[j].innerHTML = "&#x2606";
+                    }
+                })
+
+                //Resets on mouseout to current rating
+                rateClass[i].addEventListener("mouseout",(e)=>{
+                    this.state.ratings.forEach((r,i)=>{
+                        if(r>0){
+                         for(var j = 5-r; j < 5; j++){
+                          
+          document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating span")[j].innerHTML = "&#x2605";
+                         }
+                        }
+                    })
+                })
+
+            }
+
             })
         })
+
+        
+        
     }
     componentWillReceiveProps(newProps){
         
@@ -92,15 +132,36 @@ class MyBook extends React.Component{
         }
     }
     markOrRate(x,index){
-        // The form data for rating is going to be a pain in the ass.
+        
         if(x){
             return(
                 <div>
-                    <form id ="submitRate" method = "POST" action = {"/rate"+index}>
+                    <form id ={"submitRate"+index} method = "POST" action = {"/rate"+index}>
+                    <input id = "ratingValue" name ="rating" type = "hidden" value = {this.state.rating}/>
                     <center>
                     <p className = "marked"> Marked as Read</p>
                     <div className ="rating">
-<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+<span onClick = {()=>{this.setState({rating: 5},()=>{
+        //document.getElementById('ratingValue').value = 5;
+        document.getElementById('submitRate'+index).submit();
+    })
+}}>☆</span>
+<span onClick = {()=>{this.setState({rating: 4},()=>{
+        document.getElementById('submitRate'+index).submit();
+})
+}}>☆</span>
+<span onClick = {()=>{this.setState({rating: 3},()=>{
+        document.getElementById('submitRate'+index).submit();
+})
+}}>☆</span>
+<span onClick = {()=>{this.setState({rating: 2},()=>{
+        document.getElementById('submitRate'+index).submit();
+})
+}}>☆</span>
+<span onClick = {()=>{this.setState({rating: 1},()=>{
+        document.getElementById('submitRate'+index).submit();
+})
+}}>☆</span>
 </div>
 </center>
                         </form>

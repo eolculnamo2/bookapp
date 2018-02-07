@@ -111,6 +111,24 @@ router.post("/markRead:str",(req,res)=>{
   })
 })
 
+router.post("/rate:str",(req,res)=>{
+  var index = req.params.str;
+  User.findOne({username: req.user.username}, (err,response)=>{
+    var updated = response.books;
+    updated[index].rating = req.body.rating;
+    User.findOneAndUpdate({username: req.user.username}, {$set: {books: updated}},(err,response2)=>{
+      if(err){
+        throw err;
+      }
+      else{
+        res.redirect("/");
+      }
+    })
+    console.log("response: "+JSON.stringify(response.books[index])+"rating: "+req.body.rating);
+
+  })
+})
+
 
 //Add book and initial filters. Will need separate route for adding/deleting new filters
 router.post("/addNewBook", (req,res)=>{
