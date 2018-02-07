@@ -116,7 +116,17 @@ class MyBook extends React.Component{
         
     }
     componentWillReceiveProps(newProps){
-        
+        //resets ratings ... Need to recode
+        /*
+        this.state.ratings.forEach((r,i)=>{
+            if(r>0){
+             for(var j = 5-r; j < 5; j++){
+              
+document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating span")[j].innerHTML = "&#x2605";
+             }
+            }
+        })
+        */
         if(newProps.catFilter !== undefined){
             this.setState({catFilter: this.props.catFilter, filter: true})
         }

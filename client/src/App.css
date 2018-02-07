@@ -11,4 +11,11 @@
     border-radius: 3px;
     background-color: #529179;
     color: white;
+  
+  }
+  @media(max-width: 1079px){
+      .login-button{
+          margin: 0;
+          padding: 5px;
+      }
   }

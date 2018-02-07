@@ -16,8 +16,9 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.use('/', authentication);
 app.use('/', manageBooks);
 
-/*
-app.get("/query",(req,res)=>{
+
+//Will need to send Amazon info instead of Google for amazon links
+app.post("/query",(req,res)=>{
 
     absse.search('the prince', function(error, result){
         if(error){
@@ -29,7 +30,7 @@ app.get("/query",(req,res)=>{
     }, 1)
     
 })
-  */
+
 
 
 
@@ -37,9 +38,7 @@ app.get("/query",(req,res)=>{
 app.get("/",(req,res)=>{
     res.sendFile(__dirname+"/client/build/index.html")
 })
-app.get("/hi",(req,res)=>{
-    res.send("Working")
-})
+
 
 app.listen(process.env.PORT || 5000, ()=>{
     console.log('Listening...');
