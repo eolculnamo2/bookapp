@@ -27,6 +27,8 @@ class SideMenu extends React.Component{
         .then((data)=>{
     
             data.categories.forEach((x)=>{
+                var filterOurMultiples = JSON.stringify(x).split(",").length;
+                if(filterOurMultiples === 1){
                 x.forEach((y)=>{
                     var checker = true;
                     this.state.categories.forEach((z)=>{
@@ -41,9 +43,12 @@ class SideMenu extends React.Component{
                         this.setState({categories: update})
                     }
                 }) 
+            }
             })
             //End Categories
             data.tags.forEach((x)=>{
+                var filterOurMultiples = JSON.stringify(x).split(",").length;
+                if(filterOurMultiples === 1){
                 x.forEach((y)=>{
                     var checker = true;
                     this.state.tags.forEach((z)=>{
@@ -58,9 +63,12 @@ class SideMenu extends React.Component{
                         this.setState({tags: update})
                     }
                 }) 
+            }
             })
             //End Tags
             data.recommended.forEach((x)=>{
+                var filterOurMultiples = JSON.stringify(x).split(",").length;
+                if(filterOurMultiples === 1){
                 x.forEach((y)=>{
                     var checker = true;
                     this.state.recommendedBy.forEach((z)=>{
@@ -74,7 +82,8 @@ class SideMenu extends React.Component{
                         update.push(y)
                         this.setState({recommendedBy: update})
                     }
-                }) 
+                })
+            } 
             })
         })
     }

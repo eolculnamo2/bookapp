@@ -22,16 +22,15 @@
 }
 .corner-box{
     text-align: center;
-    padding: 20px 15px 20px 5px;
     top: 0;
     left: 0;
     background-color: #529179;
     min-width: 100%;
-    min-height: 8vh;
     color: white;
 
 }
 .corner-state-text{
+    padding: 10px 5px;
     margin-top:0;
     margin-bottom: 0;
     font-family: 'Baloo Paaji', cursive;

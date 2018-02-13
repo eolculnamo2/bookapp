@@ -1,3 +1,48 @@
+#newCat{
+    position: relative;
+}
+#newRec{
+    position: relative;
+}
+#newTag{
+    position: relative;
+    z-index: 3;
+}
+.child-dropdown-wrapper{
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 5px 10px 10px grey;
+    z-index: 10;
+    color: black;
+    margin: 15px;
+    overflow: visible;
+}
+.child-dropdown{
+    padding:  2px 10px;
+    z-index: 5;
+}
+#newCat:hover .child-dropdown-wrapper{
+    display: block;
+}
+#newRec:hover .child-dropdown-wrapper{
+    display: block;
+}
+#newTag:hover .child-dropdown-wrapper{
+    display: block;
+}
+.child-dropdown:hover{
+    background-color: #529179;
+    cursor: pointer;
+    color: white;
+    z-index: 3;
+}
+.child-input{
+    outline: none;
+    z-index: 3;
+    padding:  2px 10px;
+}
+
 @media screen and (max-width: 1079px){
     .item-search-box{
         width: 75vw;
@@ -5,7 +50,7 @@
         margin-right: 2%;
         background-color: white;
         z-index: 2;
-        position: relative;
+        position: static;
     }
     .query-image{
         display: inline-block;
@@ -114,5 +159,6 @@
     margin-top: 0;
     margin-left: 5%;
     display: inline-block;
+    vertical-align: top;
 }
 }
