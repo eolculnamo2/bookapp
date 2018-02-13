@@ -1,3 +1,6 @@
+#dimmer{
+    z-index: -999999;
+}
 @media screen and (max-width: 1079px){
 #searchWrap{
     width: 50vw;
