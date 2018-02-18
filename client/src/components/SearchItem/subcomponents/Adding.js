@@ -5,6 +5,12 @@ import '../SearchItem.css';
 
 By end of Tuesday Goals:
 
+
+ADDED EMPTY IFRAME -> WILL NDEED TO PUSH NEW DATA TO STATE AND CONFIRM SAVE TO AVOID DUPLICATES AND PUT IN LIBRARY
+^^Will need to work on submit function in event listeners
+NOT ABLE TO ADD TAGS AND RECOMMENDED
+
+
 check mark is 	&#10004;
 
 1) Fix error: If new cat is added by itself it does not show as a filter
@@ -132,6 +138,11 @@ class Adding extends React.Component{
         })
         //end fetch request
 
+        //form submit event listener
+        var form = document.getElementById('send-to-db');
+        form.addEventListener("submit", this.handleSubmit.bind(this,this.props.title,this.props.author,this.props.image,this.state.category,this.state.newRecommended,this.state.newTags), true);
+
+        
         //Event Listeners => Event listeners control the background color. The css dropdown is a 
         //separate hover effect in the css file
         document.getElementById("newCat").addEventListener("mouseover",()=>{
@@ -198,7 +209,58 @@ class Adding extends React.Component{
                 })
             }
         })
+        recInput.addEventListener('keypress', (e)=>{
+            if(e.keyCode === 13){
+                var newValue = recInput.value;
+                var update = this.state.existingRecommended
+                update.push(newValue)
+                this.setState({existingRecommended: update,
+                               checkRecommended: Array(update.length).fill(false)},()=>{
+                    recInput.value = "";
+                })
+            }
+        })
+        tagInput.addEventListener('keypress', (e)=>{
+            if(e.keyCode === 13){
+                var newValue = tagInput.value;
+                var update = this.state.existingTags
+                update.push(newValue)
+                this.setState({existingTags: update,
+                               checkTags: Array(update.length).fill(false)},()=>{
+                    tagInput.value = "";
+                })
+            }
+        })
 
+    }
+
+    handleSubmit(passTitle,passAuthor,passImage,passCategory,passRecommended,passTags){
+        /*
+        handleSubmit is a callback to the submit event listener which is at the top of the event listeners.
+         The actual form data is at the bottom of this javasript page.
+
+        All information must be pushed back up the tree from Adding.JS to SearchItem.JS
+        to MyBook.JS because of autosave. This allows the new information to display 
+        without a page reload.
+
+        learning notes... attempted to pass props and states i..e title: this.props.title or category: this.state.category
+        but would not work
+        */
+     
+        var infoPackage = {
+            title: passTitle,
+            author: passAuthor,
+            image: passImage,
+            category: passCategory,
+            recommended: passRecommended,
+            tags: passTags
+        }
+
+        //callback
+       this.props.intermediarySender(infoPackage);
+
+        //After submit, will post a file saved confirmation
+        
     }
     newCategory(e, filter){
         /* newCategory comes from the select tags onChange event. 
@@ -339,7 +401,8 @@ class Adding extends React.Component{
                     </div>
                     <br/>
                 </div>
-            <form className="inline-form" method="POST" action = "/addNewBook">
+
+            <form id = "send-to-db" target = "uploader_iframe" className="inline-form" method="POST" action = "/addNewBook">
                     <input type ="hidden" name = "title" value = {this.props.title} />
                     <input type ="hidden" name = "author" value = {this.props.author} />
                     <input type ="hidden" name = "image" value = {this.props.image} />
@@ -350,6 +413,8 @@ class Adding extends React.Component{
                     &#10004;
                     </button>
                     </form>
+
+                    
                     </div>
         )
     }

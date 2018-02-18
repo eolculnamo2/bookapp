@@ -24,6 +24,7 @@ class App extends Component {
     }
     this.filters = this.filters.bind(this);
     this.clearFilters = this.clearFilters.bind(this)
+    this.finalHandleCallback = this.finalHandleCallback.bind(this)
   }
   filters(type, name){
     if(type === "catSend"){
@@ -46,13 +47,33 @@ class App extends Component {
     this.setState({
       catFilter:[],
       tagFilter:[],
-      recFilter:[]
+      recFilter:[],
+      newBook: {}
     })
   }
+
+  finalHandleCallback(x){
+    //from Search
+    this.setState({newBook: x})
+
+    //Would like to add banner eventually below =>
+    /*var banner = document.getElementById("saved-banner");
+      banner.style.display = "block";
+
+      setTimeout(()=>{
+        banner.style.display = "none";
+      },2000)
+      */
+  }
+
   //Home Screen
   home(){
     return (
       <div>
+        <iframe id="uploader_iframe" name="uploader_iframe"/>
+        <div id = "saved-banner">
+          Book Saved
+          </div>
         <form method = "POST" action = "/logout">
       <button type = "submit" className = "login-button">
          Logout
@@ -60,10 +81,11 @@ class App extends Component {
       </form>
         <SideMenu clearFilters = {this.clearFilters} filter = {this.filters} />
         <div className="right-side">
-        <Search/>
+        <Search finalCallback = {this.finalHandleCallback}/>
         <MyBook catFilter = {this.state.catFilter}
                 tagFilter = {this.state.tagFilter}
-                recFilter = {this.state.recFilter}/>
+                recFilter = {this.state.recFilter}
+                newBook = {this.state.newBook}/>
           </div>
       </div>
     );

@@ -11,7 +11,8 @@ class SearchItem extends React.Component{
             // status is notadded, adding, or in-library. Status state controls which subcomponent is rendered
             status: "not-added"
         }
-        this.changeStatus = this.changeStatus.bind(this)
+        this.changeStatus = this.changeStatus.bind(this);
+        this.intermediaryHandleCallback = this.intermediaryHandleCallback.bind(this);
     }
     componentDidMount(){
         //Fetch request to see if book is already in library in order properly initialize state;
@@ -40,6 +41,16 @@ class SearchItem extends React.Component{
         //callback from subcomponents via props. x is the updated status.
         this.setState({status: x})
     }
+    intermediaryHandleCallback(x){
+        /*
+        Takes handleSubmit function from Adding.JS (found with event listeners on Adding.js)
+        This is an intermediary step because it receives data from Adding.JS and sends to
+        MyBook.js
+        */
+       
+        this.props.secondCallback(x);
+
+    }
     render(){
          /*
         NOTADDED, ADDING, INLIBRARY
@@ -56,7 +67,8 @@ class SearchItem extends React.Component{
             return <Adding changeStatus = {this.changeStatus}
                            title = {this.props.title}
                            author = {this.props.author}
-                           image = {this.props.image}/>
+                           image = {this.props.image}
+                           intermediarySender = {this.intermediaryHandleCallback}/>
         }
         else if(this.state.status == "in-library"){
             return <InLibrary changeStatue = {this.changeStatus}

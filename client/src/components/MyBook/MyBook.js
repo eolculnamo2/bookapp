@@ -127,6 +127,7 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
             }
         })
         */
+    
         if(newProps.catFilter !== undefined){
             this.setState({catFilter: this.props.catFilter, filter: true})
         }
@@ -139,6 +140,45 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
         //clear filter
         if(newProps.catFilter.length === 0 && newProps.recFilter.length === 0 && newProps.tagFilter.length === 0){
             this.setState({filter: false})
+        }
+
+        if(newProps.newBook.author.length > 0){
+            //import object and assign variables
+            var newAuth = newProps.newBook.author;
+            var newImg = newProps.newBook.image;
+            var newTitle = newProps.newBook.title;
+            var newCat = newProps.newBook.category;
+            var newRec = newProps.newBook.recommended;
+            var newTag = newProps.newBook.tags;
+            //push new data so that added books appear on screen.
+            var authors = this.state.authors;
+            authors.unshift(newAuth);
+            var images = this.state.images;
+            images.unshift(newImg);
+            var titles = this.state.titles;
+            titles.unshift(newTitle);
+            var cats = this.state.categories;
+            cats.unshift(newCat);
+            var recommendedBy = this.state.recommendedBy;
+            recommendedBy.unshift(newRec);
+            var tags = this.state.tags;
+            tags.unshift(newTag);
+            var read = this.state.ifRead;
+            read.unshift(false);
+            //ifRead
+            var rating = this.state.ratings;
+            rating.push(0);
+        
+            this.setState({
+                authors: authors,
+                images: images,
+                titles: titles,
+                categories: cats,
+                recommendedBy: recommendedBy,
+                tags: tags,
+                ifRead: read,
+                ratings: rating
+            })
         }
     }
     markOrRate(x,index){

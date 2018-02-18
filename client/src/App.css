@@ -13,6 +13,14 @@
     color: white;
   
   }
+  #saved-banner{
+      color: #529179;
+      font-size: 25px;
+      text-align: center;
+      position: fixed;
+      margin-top: 2%;
+      display: none;
+  }
   @media(max-width: 1079px){
       .login-button{
           margin: 0;

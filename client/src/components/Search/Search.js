@@ -11,6 +11,7 @@ class Search extends React.Component{
             imageArr: [],
             query: ""
         }
+        this.secondHandleCallback = this.secondHandleCallback.bind(this);
     }
     componentDidMount(){
         //componentDidMount houses event listener
@@ -88,6 +89,23 @@ class Search extends React.Component{
         });
     }
     */
+  
+    secondHandleCallback(x){
+
+      
+        //from SearchItem
+        //Below would open new tab without a callback function in the setState
+       
+        this.props.finalCallback(x)
+            document.getElementById("dimmer").classList.remove('search-on');
+            document.getElementById("searchInput").style.backgroundColor = "#f2f2f2";
+            this.setState({
+                titles: [],
+                authors: [],
+                imageArr: [],
+                query: ""})
+    }
+
     search(){
         return(
             <div>
@@ -95,7 +113,7 @@ class Search extends React.Component{
                 <input id = "searchInput" placeholder= "&#x1F50D;  Search" className ="search-input"/>
                 {this.state.titles.map((x,i)=>{
                     if(this.state.titles.length > 0 && i <=5){
-                   return <SearchItem author = {this.state.authors[i]} image = {this.state.images[i]} title = {x}/>
+                   return <SearchItem  secondCallback = {this.secondHandleCallback} author = {this.state.authors[i]} image = {this.state.images[i]} title = {x}/>
                     }
                 })}
                 </div>
