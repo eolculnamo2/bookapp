@@ -56,14 +56,14 @@ class App extends Component {
     //from Search
     this.setState({newBook: x})
 
-    //Would like to add banner eventually below =>
-    /*var banner = document.getElementById("saved-banner");
+  
+    var banner = document.getElementById("saved-banner");
       banner.style.display = "block";
 
       setTimeout(()=>{
         banner.style.display = "none";
       },2000)
-      */
+   
   }
 
   //Home Screen

@@ -2,19 +2,7 @@ import React from 'react';
 import '../SearchItem.css';
 
 /*
-
-By end of Tuesday Goals:
-
-
-ADDED EMPTY IFRAME -> WILL NDEED TO PUSH NEW DATA TO STATE AND CONFIRM SAVE TO AVOID DUPLICATES AND PUT IN LIBRARY
-^^Will need to work on submit function in event listeners
-NOT ABLE TO ADD TAGS AND RECOMMENDED
-
-
 check mark is 	&#10004;
-
-1) Fix error: If new cat is added by itself it does not show as a filter
-2) form will target empty iframe for save without load
 3) Confirmation of save shows up on screen
 ** Will need to fix position of dropdown as it pushes down page.
 
@@ -140,7 +128,13 @@ class Adding extends React.Component{
 
         //form submit event listener
         var form = document.getElementById('send-to-db');
-        form.addEventListener("submit", this.handleSubmit.bind(this,this.props.title,this.props.author,this.props.image,this.state.category,this.state.newRecommended,this.state.newTags), true);
+        form.addEventListener("submit", this.handleSubmit.bind(this,
+                                                               this.props.title,
+                                                               this.props.author,
+                                                               this.props.image,
+                                                               this.state.category,
+                                                               this.state.newRecommended,
+                                                               this.state.newTags), true);
 
         
         //Event Listeners => Event listeners control the background color. The css dropdown is a 
@@ -234,7 +228,12 @@ class Adding extends React.Component{
 
     }
 
-    handleSubmit(passTitle,passAuthor,passImage,passCategory,passRecommended,passTags){
+    handleSubmit(passTitle,
+                 passAuthor,
+                 passImage,
+                 passCategory,
+                 passRecommended,
+                 passTags){
         /*
         handleSubmit is a callback to the submit event listener which is at the top of the event listeners.
          The actual form data is at the bottom of this javasript page.

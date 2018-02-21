@@ -88,11 +88,45 @@ class SideMenu extends React.Component{
         })
     }
     handleFilterCallback(e){
+
         this.props.filter(e.target.id, e.target.innerHTML);
+
+        //Toggle checkmark.. currently only adds
+        var checkMark = RegExp("✔");
+  
+       var test = checkMark.test(e.target.innerHTML)
+       
+
+        var filters = document.querySelectorAll("p");
+        if(!test){
+        for(var filter of filters){
+            var numberedItem = filter.className.split(" ")[1]
+            var targetNumbered = e.target.className.split(" ")[1]
+            
+            if(numberedItem == targetNumbered && filter.innerHTML == e.target.innerHTML){
+                e.target.innerHTML += "&#10004";
+            }
+        }
+     }
+
     }
     handleClearFilter(){
        
         this.props.clearFilters();
+
+        //remove checkmarks
+        var filters = document.querySelectorAll("p");
+        var checkMark = RegExp("✔");
+        for(var filter of filters){
+            var test = checkMark.test(filter.innerHTML)
+          
+            if(test === true){
+                
+                filter.innerHTML = filter.innerHTML.slice(0,filter.innerHTML.length-1)
+               
+            }
+        }
+       
     }
     render(){
         return(
@@ -110,20 +144,20 @@ class SideMenu extends React.Component{
                 <h4 className = "subheader">
                 Categories
                     </h4>
-                    {this.state.categories.map((x)=>{
-                        return(<p id = "catSend" onClick = {this.handleFilterCallback.bind(this)} className = "item">{x}</p>)
+                    {this.state.categories.map((x,i)=>{
+                        return(<p id = "catSend" onClick = {this.handleFilterCallback.bind(this)} className ={"item item"+i}>{x}</p>)
                     })}
                 <h4 className = "subheader">
                 Recommended By
                     </h4>
-                    {this.state.recommendedBy.map((x)=>{
-                        return(<p id = "recSend" onClick = {this.handleFilterCallback.bind(this)} className = "item">{x}</p>)
+                    {this.state.recommendedBy.map((x,i)=>{
+                        return(<p id = "recSend" onClick = {this.handleFilterCallback.bind(this)} className = {"item item"+i}>{x}</p>)
                     })}
                 <h4 className = "subheader">
                 Tags
                     </h4>
-                    {this.state.tags.map((x)=>{
-                        return(<p id = "tagSend" onClick = {this.handleFilterCallback.bind(this)} className = "item">{x}</p>)
+                    {this.state.tags.map((x,i)=>{
+                        return(<p id = "tagSend" onClick = {this.handleFilterCallback.bind(this)} className = {"item item"+i}>{x}</p>)
                     })}
                     <p className = "clear-filters" onClick = {this.handleClearFilter.bind(this)}>clear filters</p>
                     </div>

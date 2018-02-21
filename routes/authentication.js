@@ -159,7 +159,7 @@ router.post("/addNewBook", (req,res)=>{
     audibleURL: "",
     rating: 0
   }
-  User.findOneAndUpdate({username: req.user.username},{$push: {books: newBook, categories: importedCat, tags: importedTags, recommended: importedRecommendedBy}},{new: true},(err,result)=>{
+  User.findOneAndUpdate({username: req.user.username},{$push: {books: newBook, categories: importedCat, tags: importedTags, recommended: importedRecommendedBy, $position: 0}},{new: true},(err,result)=>{
     console.log("updated "+req.user.username+" recs "+ importedTags + " tags " + importedRecommendedBy);
     res.redirect("/");
   })
