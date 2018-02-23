@@ -1,6 +1,71 @@
 import React from 'react';
 import './MyBook.css';
 
+ 
+function filter(fil1,fil2,fil3,list1,list2,list3){
+    var lock = [false,false,false];
+    if(fil1.length>0){
+        fil1.forEach((x)=>{
+            var testArr = []
+            list1.forEach((y)=>{
+                if(x == y){
+                    testArr.push("1")
+                }
+            })
+            if(testArr.length == fil1.length){
+                lock[0] = true;
+            }
+        })
+    }
+    
+    if(fil2.length>0){
+        fil2.forEach((x)=>{
+            var testArr = []
+            list2.forEach((y)=>{
+                if(x == y){
+                    testArr.push("1")
+                }
+            })
+            if(testArr.length == fil2.length){
+                lock[1] = true;
+            }
+        })
+    }
+
+    if(fil3.length>0){
+        fil3.forEach((x)=>{
+            var testArr = [];
+            list3.forEach((y)=>{
+                if(x == y){
+                    testArr.push("1")
+                }
+            })
+            if(testArr.length == fil3.length){
+                lock[2] = true;
+            }
+        })
+    }
+
+    if(fil1.length == 0){
+        lock[0] = true;
+    }
+
+    if(fil2.length == 0){
+        lock[1] = true;
+    }
+
+    if(fil3.length == 0){
+        lock[2] = true;
+    }
+
+    if(lock[0] == true && lock[1] == true && lock[2] == true){
+        return true
+    }
+    return false;
+}
+
+
+
 class MyBook extends React.Component{
     constructor(){
         super()
@@ -18,12 +83,14 @@ class MyBook extends React.Component{
             catFilter: [],
             recFilter: [],
             tagFilter: [],
+            pass: false,
+            lock: [true,true,true],
             rating: 0
-
         }
+      
     }
     componentDidMount(){
-
+        
       fetch("/bookData",
         {
             method: "get",
@@ -111,37 +178,34 @@ class MyBook extends React.Component{
 
             })
         })
-
-        
         
     }
     componentWillReceiveProps(newProps){
-        //resets ratings ... Need to recode
-        /*
-        this.state.ratings.forEach((r,i)=>{
-            if(r>0){
-             for(var j = 5-r; j < 5; j++){
-              
-document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating span")[j].innerHTML = "&#x2605";
-             }
-            }
-        })
-        */
-    
+       
         if(newProps.catFilter !== undefined){
-            this.setState({catFilter: this.props.catFilter, filter: true})
+    
+             this.setState({catFilter: newProps.catFilter,
+                            filter: true})
+
         }
         if(newProps.recFilter !== undefined){
-            this.setState({recFilter: this.props.recFilter, filter: true})
+           
+            this.setState({recFilter: newProps.recFilter,
+                           filter: true})
         }
         if(newProps.tagFilter !== undefined){
-            this.setState({tagFilter: this.props.tagFilter, filter: true})
+           
+            this.setState({tagFilter: newProps.tagFilter,
+                           filter: true})
         }
         //clear filter
         if(newProps.catFilter.length === 0 && newProps.recFilter.length === 0 && newProps.tagFilter.length === 0){
-            this.setState({filter: false})
+            
+            this.setState({filter: false, catFilter:[],recFilter:[],tagFilter:[]})
+            
         }
 
+        
         if(newProps.newBook.author.length > 0){
             //import object and assign variables
             var newAuth = newProps.newBook.author;
@@ -290,58 +354,30 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
                 </div>
         )
     }
-    render(){
-       /*
-       filter options:
-       -> Sent through callback from SideMenu to App State
-       -> Called through props to MyBook
-       -> Display none OR if statement. Probably if statement?
-       -> Further issue... Below maps titles, but not filters. Figure it out..
-       ^^^ May need to load for books tags into state forEach like with images i.e. this.state.images[i]
-       */
+    filtering(){
         return(
-           <div className = "mybook-box">
+        <div className = "mybook-box">
+
+    
                {this.state.titles.map((x,i)=>{
-                   if(!this.state.filter){
-                    return this.bookTemplate(x,i);
-                   }
-                   else if(this.state.filter){
-                       var checker = false;
-                       //filter categories
-                       this.state.catFilter.forEach((x)=>{
-                           this.state.categories[i].forEach((y)=>{
-                               if(x == y){
-                                   checker = true;
-                               }
-                           })
-                       })
-                       //filter recommendedBy.. Filter is treated as an array of strings
-                       // not an array of arrays like other two(hence why they have[i])
-                       this.state.recFilter.forEach((x)=>{
-                       // this.state.recommendedBy[i].forEach((y)=>{
-                            if(x === this.state.recommendedBy[i]){
-                                checker = true;
-                            }
-                       // })
-                    })
-                        //filter tags
-                        this.state.tagFilter.forEach((x)=>{
-                            this.state.tags[i].forEach((y)=>{
-                                if(x == y){
-                                    
-                                    checker = true;
-                                }
-                            })
-                        })
-                      
-                        if(checker === true){
-                            return this.bookTemplate(x,i);
-                        }
-                   }
+            
+                    var y =  filter(this.state.catFilter,this.state.recFilter,this.state.tagFilter,
+                        this.state.categories[i],this.state.recommendedBy[i],this.state.tags[i]);
+                        console.log(this.state.catFilter+this.state.recFilter+this.state.catFilter)
+                
+                    if(y){
+                        return this.bookTemplate(x,i);
+                     }
+                 
+                   
                    
                })}
                </div>
         )
+
+    }
+    render(){
+        return this.filtering()
     }
 }
 
