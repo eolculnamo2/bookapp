@@ -14,7 +14,7 @@ var manageBooks = require('./routes/manageBooks');
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use('/', authentication);
-app.use('/', manageBooks);
+//app.use('/', manageBooks);
 
 
 //Will need to send Amazon info instead of Google for amazon links
