@@ -127,16 +127,28 @@ class Adding extends React.Component{
         //end fetch request
 
         //form submit event listener
+        /*
         var form = document.getElementById('send-to-db');
-        form.addEventListener("submit", this.handleSubmit.bind(this,
-                                                               this.props.title,
-                                                               this.props.author,
-                                                               this.props.image,
-                                                               this.state.category,
-                                                               this.state.newRecommended,
-                                                               this.state.newTags), true);
+        form.addEventListener("submit",
+    
+        this.handleSubmit(
+            this.props.title,
+            this.props.author,
+            this.props.image,
+            this.state.category,
+            this.state.newRecommended,
+            this.state.newTags)
+           
+            )       
+            */
 
+           // document.getElementById("adder").addEventListener("click",
         
+            
+               
+            //    )
+
+               
         //Event Listeners => Event listeners control the background color. The css dropdown is a 
         //separate hover effect in the css file
         document.getElementById("newCat").addEventListener("mouseover",()=>{
@@ -245,7 +257,7 @@ class Adding extends React.Component{
         learning notes... attempted to pass props and states i..e title: this.props.title or category: this.state.category
         but would not work
         */
-     
+       
         var infoPackage = {
             title: passTitle,
             author: passAuthor,
@@ -256,8 +268,10 @@ class Adding extends React.Component{
         }
 
         //callback
+        
        this.props.intermediarySender(infoPackage);
-
+       document.getElementById("send-to-db").submit().bind(this);
+      
         //After submit, will post a file saved confirmation
         
     }
@@ -408,7 +422,14 @@ class Adding extends React.Component{
                     <input type = "hidden" name = "category" value = {this.state.category}/>
                     <input type = "hidden" name = "recommendedBy" value = {this.state.newRecommended}/>
                     <input type = "hidden" name = "tags" value = {this.state.newTags}/>
-                    <button type ="submit" className = "checkmark">
+                    <button type ="button" onClick = {
+                this.handleSubmit.bind(this,
+                this.props.title,
+                this.props.author,
+                this.props.image,
+                this.state.category,
+                this.state.newRecommended,
+                this.state.newTags)} className = "checkmark">
                     &#10004;
                     </button>
                     </form>

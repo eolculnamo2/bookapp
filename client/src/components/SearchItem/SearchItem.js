@@ -68,7 +68,8 @@ class SearchItem extends React.Component{
                            title = {this.props.title}
                            author = {this.props.author}
                            image = {this.props.image}
-                           intermediarySender = {this.intermediaryHandleCallback}/>
+                           intermediarySender = {this.intermediaryHandleCallback}
+                           />
         }
         else if(this.state.status == "in-library"){
             return <InLibrary changeStatue = {this.changeStatus}

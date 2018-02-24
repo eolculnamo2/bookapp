@@ -17,7 +17,7 @@ class NotAdded extends React.Component{
                         By {this.props.author}
                         </p>
                     </div>
-                    <button type = "button" onClick = {this.handleCallback.bind(this)} className = "add-box">
+                    <button id = "something-else" type = "button" onClick = {this.handleCallback.bind(this)} className = "add-box">
                         ADD
                         </button>
                     
