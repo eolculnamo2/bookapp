@@ -155,7 +155,7 @@ router.post("/addNewBook", (req,res)=>{
     read: false,
     categories: importedCat,
     tags: importedTags,
-    recommendedBy: importedRecommendedByString,
+    recommendedBy: importedRecommendedBy,
     amazonURL: "",
     audibleURL: "",
     rating: 0

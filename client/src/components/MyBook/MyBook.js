@@ -363,7 +363,7 @@ class MyBook extends React.Component{
             
                     var y =  filter(this.state.catFilter,this.state.recFilter,this.state.tagFilter,
                         this.state.categories[i],this.state.recommendedBy[i],this.state.tags[i]);
-                        console.log(this.state.catFilter+this.state.recFilter+this.state.catFilter)
+
                 
                     if(y){
                         return this.bookTemplate(x,i);
