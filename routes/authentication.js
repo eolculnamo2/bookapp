@@ -18,7 +18,7 @@ router.use(express.static('build'));
 
 router.use('/', manageBooks);
 router.use(cookieSession({
-  maxAge: 24*60*60*1000,
+  maxAge: 24*60*60*1100,
   keys: ["faewfeag43g24098gy24p98gy"]
 }))
 

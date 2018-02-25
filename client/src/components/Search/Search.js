@@ -15,6 +15,15 @@ class Search extends React.Component{
     }
     componentDidMount(){
         //componentDidMount houses event listener
+      window.addEventListener("resize", ()=>{
+          if(window.innerWidth > 1100){
+              document.getElementById("hide-if-mobile").style.display = "block";
+          }
+          else{
+            document.getElementById("hide-if-mobile").style.display = "none";
+            document.getElementById("dimmer").classList.remove('search-on');
+          }
+      })
       document.getElementById("searchInput").addEventListener("keyup", function(event) {
       event.preventDefault();
       if (event.keyCode === 13) {
@@ -31,7 +40,8 @@ class Search extends React.Component{
   document.getElementById("dimmer").addEventListener("click",()=>{
     document.getElementById("dimmer").classList.remove('search-on');
     document.getElementById("searchInput").style.backgroundColor = "#f2f2f2";
-    if(document.getElementById('hide-if-mobile').style.display == "block"){
+    
+    if(document.getElementById('hide-if-mobile').style.display == "block" && window.innerWidth < 1100){
         document.getElementById('hide-if-mobile').style.display = "none";
       }
     this.setState({

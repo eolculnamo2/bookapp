@@ -90,7 +90,7 @@ class MyBook extends React.Component{
       
     }
     componentDidMount(){
-        
+        console.log(window.innerWidth)
       fetch("/bookData",
         {
             method: "get",

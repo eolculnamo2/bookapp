@@ -2,7 +2,7 @@ import React from 'react';
 import '../SearchItem.css';
 
 /*
-check mark is 	&#10004;
+check mark is 		&#10004;;
 3) Confirmation of save shows up on screen
 ** Will need to fix position of dropdown as it pushes down page.
 
@@ -320,7 +320,7 @@ class Adding extends React.Component{
                 var updateData = formFilter;
                 updateData.push(x);
                 //Changes HTML
-                e.target.innerHTML += " &#10004";
+                e.target.innerHTML += "	&#10004;";
                 var hold = checkFilter;
                 hold[i] = true;
                 //Set state for checking and filter state
@@ -430,7 +430,7 @@ class Adding extends React.Component{
                 this.state.category,
                 this.state.newRecommended,
                 this.state.newTags)} className = "checkmark">
-                    &#10004;
+                    	&#10004;
                     </button>
                     </form>
 

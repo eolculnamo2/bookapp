@@ -105,7 +105,7 @@ class SideMenu extends React.Component{
             var targetNumbered = e.target.className.split(" ")[1]
             
             if(numberedItem == targetNumbered && filter.innerHTML == e.target.innerHTML){
-                e.target.innerHTML += " &#10004";
+                e.target.innerHTML += " &#10004;";
             }
         }
      }
