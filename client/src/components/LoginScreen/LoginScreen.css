@@ -1,10 +1,46 @@
+#login-header{
+    margin: 0;
+    padding: 0;
+    background-color: #529179;
+    min-height: 10vh;
+    width: 100%;
+}
+.login-icon{
+    padding: 2px;
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 15px;
+    display: inline-block;
+}
+.login-input{
+    margin: 2px;
+    padding: 2px;
+    min-height: 15px;
+    vertical-align: bottom;
+}
 .cred-box{
-    margin-top: 5%;
+    margin: 5% auto;
+    border: 2px solid black;
+    width: 275px;
+}
+.box-header-and-footer{
+    margin: 0;
+    width: 100%;
+    min-height: 5vh;
+    background-color: #529179;
+}
+.wrapper-padding{
+    padding: 20px;
 }
 .cred-button{
-    margin-top: 1%;
-    margin-left: 1%;
+    margin-top: 5%;
+    margin-left: 2%;
     background-color: #529179;
     color: white;
     padding: 10px 20px 10px 20px;
+}
+@media screen and (max-width: 700px){
+    .cred-box{
+        width: 95%;
+    }
 }

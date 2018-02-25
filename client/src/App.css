@@ -1,4 +1,6 @@
-
+button{
+    cursor: pointer;
+}
 .right-side{
     display: inline-block;
     vertical-align: top;

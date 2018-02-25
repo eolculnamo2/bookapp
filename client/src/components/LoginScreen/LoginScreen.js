@@ -1,4 +1,6 @@
 import React from 'react';
+import profile from './assets/profile.svg';
+import key from './assets/key.svg';
 import './LoginScreen.css';
 
 //Houses both login and registration. The two options
@@ -41,17 +43,22 @@ class LoginScreen extends React.Component{
     credentials(){
         return(
             <div>
+                <div id = "login-header"></div>
                 <center>
             <div className = "cred-box">
+            <div className = "box-header-and-footer"></div>
+            <div className = "wrapper-padding">
                 <form method = "POST" action = "/login">
                     <h4>
                         Login
                         </h4>
-                    <input name = "username"/><br/>
+                    <img className = "login-icon" src = {profile}/>
+                    <input className = "login-input" name = "username"/><br/>
                     <h4>
                         Password
                         </h4>
-                    <input name = "password" type = "password"/><br/>
+                        <img className = "login-icon" src = {key}/>
+                    <input className = "login-input" name = "password" type = "password"/><br/>
                     <button className = "cred-button" type = "button" onClick = {()=>{this.setState({registration: true})}}>
                         New User
                         </button>
@@ -59,6 +66,8 @@ class LoginScreen extends React.Component{
                         Login
                         </button>
                     </form>
+                    </div>
+                    <div className = "box-header-and-footer"></div>
                 </div>
                 </center>
             </div>
@@ -67,21 +76,22 @@ class LoginScreen extends React.Component{
     register(){
         return(
         <div>
+            <div id = "login-header"></div>
             <center>
             <div className = "cred-box">
                 <form method = "POST" action = "/newUser">
                     <h4>
                         Login
                         </h4>
-                    <input name = "username"/><br/>
+                    <input className = "login-input" name = "username"/><br/>
                     <h4>
                         Password
                         </h4>
-                    <input name = "password" type = "password"/><br/>
+                    <input className = "login-input"  name = "password" type = "password"/><br/>
                     <h4>
                         Confirm Password
                         </h4>
-                        <input name = "confirmPassword" type = "password"/><br/>
+                        <input className = "login-input"  name = "confirmPassword" type = "password"/><br/>
                         <button className = "cred-button" type = "button" onClick = {()=>{this.setState({registration: false})}}>
                             Back
                             </button>
