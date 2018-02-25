@@ -1,4 +1,5 @@
 import React from 'react';
+import mobile from './mobile.svg'
 import './SideMenu.css';
 
 class SideMenu extends React.Component{
@@ -128,16 +129,33 @@ class SideMenu extends React.Component{
         }
        
     }
+    toggleMobileMenu(){
+        var menu = document.getElementById("hide-if-mobile");
+
+        
+       if (menu.style.display == "none"){
+            menu.style.display = "block"
+            document.getElementById("dimmer").classList.add('search-on')
+        } 
+        else{
+            menu.style.display = "none";   
+            document.getElementById("dimmer").classList.remove('search-on');
+        } 
+
+          
+        
+    }
     render(){
         return(
         <div className = "menu-box">
             
             <div className = "corner-box">
+            <img onClick={this.toggleMobileMenu.bind(this)} className = "mobile-menu" src = {mobile}/>
                 <h2 className = "corner-state-text">
                     Recommended
                     </h2>
                 </div>
-            <div className = "hide-if-mobile">
+            <div id = "hide-if-mobile">
                 <h1 className = "book-header">
                 Books
                     </h1>

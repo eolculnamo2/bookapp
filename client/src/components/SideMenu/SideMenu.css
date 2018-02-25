@@ -1,6 +1,4 @@
-.hide-if-mobile{
-    display: none;
-}
+
 .corner-box{
     text-align: center;
     padding: 20px 15px 20px 5px;
@@ -11,8 +9,45 @@
     min-height: 8vh;
     color: white;
 }
+.mobile-menu{
+    cursor: pointer;
+    margin: 10px;
+    display: block;
+    width: 50px;
+}
+.book-header{
+    margin-left: 10%;
+}
+.subheader{
+    margin-left: 10%;
+}
+.item{
+    color:#529179;
+    margin-left: 10%; 
+    cursor: pointer;
+}
+
+.clear-filters{
+    cursor: pointer;
+    color: #b2b2b2;
+    font-size: 11px;
+    margin-left: 10%;
+}
+@media(max-width: 1079px){
+    #hide-if-mobile{
+    top: 0;
+    display: none;
+    position: fixed;
+    background-color: white;
+    width: 80vw;
+    border: 2px solid black;
+    padding: 10px;
+    z-index: 5;
+    }
+}
+
 @media screen and (min-width: 1080px){
-.hide-if-mobile{
+#hide-if-mobile{
     display: inline-block;
 }
 .menu-box{
@@ -36,22 +71,7 @@
     font-family: 'Baloo Paaji', cursive;
     font-size: 25px;
 }
-.book-header{
-    margin-left: 10%;
-}
-.subheader{
-    margin-left: 10%;
-}
-.item{
-    color:#529179;
-    margin-left: 10%; 
-    cursor: pointer;
-}
-
-.clear-filters{
-    cursor: pointer;
-    color: #b2b2b2;
-    font-size: 11px;
-    margin-left: 10%;
+.mobile-menu{
+    display: none;
 }
 }

@@ -31,6 +31,9 @@ class Search extends React.Component{
   document.getElementById("dimmer").addEventListener("click",()=>{
     document.getElementById("dimmer").classList.remove('search-on');
     document.getElementById("searchInput").style.backgroundColor = "#f2f2f2";
+    if(document.getElementById('hide-if-mobile').style.display == "block"){
+        document.getElementById('hide-if-mobile').style.display = "none";
+      }
     this.setState({
         titles: [],
         authors: [],
