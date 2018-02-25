@@ -79,6 +79,8 @@ class LoginScreen extends React.Component{
             <div id = "login-header"></div>
             <center>
             <div className = "cred-box">
+            <div className = "box-header-and-footer"></div>
+            <div className = "wrapper-padding">
                 <form method = "POST" action = "/newUser">
                     <h4>
                         Login
@@ -99,6 +101,8 @@ class LoginScreen extends React.Component{
                             Register
                             </button>
                     </form>
+                    </div>
+                    <div className = "box-header-and-footer"></div>
                 </div>
                 </center>
             </div>
