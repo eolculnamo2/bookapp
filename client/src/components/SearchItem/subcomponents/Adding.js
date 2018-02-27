@@ -8,11 +8,9 @@ check mark is 		&#10004;;
 
 
 By end of next week:
-1) Change filters to OR instead of AND  
-2) Add checkmarks to filters
+
 3) Change API from google to amazon
 4) Fix star bug. It gets rid of stars on filter.
-5) Add non-reloading page save with text confirmation.
 
 
 Next step:
@@ -205,8 +203,8 @@ class Adding extends React.Component{
         var tagInput = document.getElementById('tagInput')
 
         catInput.addEventListener('keypress', (e)=>{
-            if(e.keyCode === 13){
-                var newValue = catInput.value;
+            if(e.keyCode === 13 && catInput.value.length > 0){
+                var newValue = catInput.value.trim();
                 var update = this.state.existingCategories
                 update.push(newValue)
                 this.setState({existingCategories: update,
@@ -216,8 +214,8 @@ class Adding extends React.Component{
             }
         })
         recInput.addEventListener('keypress', (e)=>{
-            if(e.keyCode === 13){
-                var newValue = recInput.value;
+            if(e.keyCode === 13  && recInput.value.length > 0){
+                var newValue = recInput.value.trim();
                 var update = this.state.existingRecommended
                 update.push(newValue)
                 this.setState({existingRecommended: update,
@@ -227,8 +225,8 @@ class Adding extends React.Component{
             }
         })
         tagInput.addEventListener('keypress', (e)=>{
-            if(e.keyCode === 13){
-                var newValue = tagInput.value;
+            if(e.keyCode === 13 && tagInput.value.length > 0){
+                var newValue = tagInput.value.trim();
                 var update = this.state.existingTags
                 update.push(newValue)
                 this.setState({existingTags: update,
@@ -318,7 +316,7 @@ class Adding extends React.Component{
             if(x === e.target.innerHTML && checkFilter[i] === false){
                 //Changes what will be pushed to form data via category state
                 var updateData = formFilter;
-                updateData.push(x);
+                updateData.push( x);
                 //Changes HTML
                 e.target.innerHTML += "	&#10004;";
                 var hold = checkFilter;

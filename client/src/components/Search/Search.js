@@ -19,7 +19,7 @@ class Search extends React.Component{
           if(window.innerWidth > 1100){
               document.getElementById("hide-if-mobile").style.display = "block";
           }
-          else{
+          else if(window.innerWidth < 1100 && window.innerWidth > 700){
             document.getElementById("hide-if-mobile").style.display = "none";
             document.getElementById("dimmer").classList.remove('search-on');
           }
