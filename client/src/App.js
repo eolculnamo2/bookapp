@@ -20,11 +20,13 @@ class App extends Component {
       login: true,
       catFilter: [],
       tagFilter: [],
-      recFilter: []
+      recFilter: [],
+      ifRead: 0
     }
     this.filters = this.filters.bind(this);
     this.clearFilters = this.clearFilters.bind(this)
     this.finalHandleCallback = this.finalHandleCallback.bind(this)
+    this.toggleRead = this.toggleRead.bind(this)
   }
   filters(type, name){
     if(type === "catSend"){
@@ -66,6 +68,17 @@ class App extends Component {
    
   }
 
+  toggleRead(){
+    if(this.state.ifRead === 0){
+      this.setState({ifRead: 1})
+    }
+    else if(this.state.ifRead === 1){
+      this.setState({ifRead: 2})
+    }
+    else if(this.state.ifRead === 2){
+      this.setState({ifRead: 0})
+    }
+  }
   //Home Screen
   home(){
     return (
@@ -81,10 +94,11 @@ class App extends Component {
       </form>
         <SideMenu clearFilters = {this.clearFilters} filter = {this.filters} />
         <div className="right-side">
-        <Search finalCallback = {this.finalHandleCallback}/>
+        <Search readToggle = {this.toggleRead} finalCallback = {this.finalHandleCallback}/>
         <MyBook catFilter = {this.state.catFilter}
                 tagFilter = {this.state.tagFilter}
                 recFilter = {this.state.recFilter}
+                readCheckFilter = {this.state.ifRead}
                 newBook = {this.state.newBook}/>
           </div>
       </div>

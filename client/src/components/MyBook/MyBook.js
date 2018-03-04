@@ -89,6 +89,7 @@ class MyBook extends React.Component{
             catFilter: [],
             recFilter: [],
             tagFilter: [],
+            readCheck: 0,
             pass: false,
             lock: [true,true,true],
             rating: 0
@@ -186,32 +187,51 @@ class MyBook extends React.Component{
         })
         
     }
+    reloadStars(){
+        this.state.ratings.forEach((r,i)=>{
+            if(r>0){
+             for(var j = 5-r; j < 5; j++){
+              
+document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating span")[j].innerHTML = "&#x2605";
+             }
+            }
+        })
+    }
     componentWillReceiveProps(newProps){
        
         if(newProps.catFilter !== undefined){
     
              this.setState({catFilter: newProps.catFilter,
-                            filter: true})
+                            filter: true},()=>{
+                                this.reloadStars();
+                            })
 
         }
         if(newProps.recFilter !== undefined){
            
             this.setState({recFilter: newProps.recFilter,
-                           filter: true})
+                           filter: true},()=>{
+                            this.reloadStars();
+                        })
         }
         if(newProps.tagFilter !== undefined){
            
             this.setState({tagFilter: newProps.tagFilter,
-                           filter: true})
+                           filter: true},()=>{
+                            this.reloadStars();
+                        })
         }
         //clear filter
         if(newProps.catFilter.length === 0 && newProps.recFilter.length === 0 && newProps.tagFilter.length === 0){
             
-            this.setState({filter: false, catFilter:[],recFilter:[],tagFilter:[]})
+            this.setState({filter: false, catFilter:[],recFilter:[],tagFilter:[]},()=>{
+                this.reloadStars();
+            })
             
         }
+        //update read or unread filter
+        this.setState({readCheck: newProps.readCheckFilter})
 
-        
         if(newProps.newBook.author.length > 0){
             //import object and assign variables
             var newAuth = newProps.newBook.author;
@@ -248,6 +268,8 @@ class MyBook extends React.Component{
                 tags: tags,
                 ifRead: read,
                 ratings: rating
+            },()=>{
+                this.reloadStars();
             })
         }
     }
@@ -397,13 +419,36 @@ class MyBook extends React.Component{
     
                {this.state.titles.map((x,i)=>{
             
-                    var y =  filter(this.state.catFilter,this.state.recFilter,this.state.tagFilter,
-                        this.state.categories[i],this.state.recommendedBy[i],this.state.tags[i]);
+                    var y =  filter(this.state.catFilter,
+                                    this.state.recFilter,
+                                    this.state.tagFilter,
+                                    this.state.categories[i],
+                                    this.state.recommendedBy[i],
+                                    this.state.tags[i]);
 
-                
-                    if(y){
-                        return this.bookTemplate(x,i);
-                     }
+                    
+                    if(this.state.readCheck === 0){
+                        //no if read filter
+                        if(y){
+                            return this.bookTemplate(x,i);
+                        }
+                    }
+                    else if(this.state.readCheck === 1){
+                        //read only books
+                        if(y){
+                            if(this.state.ifRead[i]){
+                            return this.bookTemplate(x,i);
+                            }
+                        }
+                    }
+                    else if(this.state.readCheck === 2){
+                        //unread only books
+                        if(y){
+                            if(!this.state.ifRead[i]){
+                                return this.bookTemplate(x,i);
+                                }
+                        }
+                    }
                  
                    
                    

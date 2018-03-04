@@ -9,6 +9,8 @@ class Search extends React.Component{
             titles: [],
             authors: [],
             imageArr: [],
+            readIndex: 0,
+            readCheck: ["Unread & Read", "Read", "Unread"],
             query: ""
         }
         this.secondHandleCallback = this.secondHandleCallback.bind(this);
@@ -118,7 +120,23 @@ class Search extends React.Component{
                 imageArr: [],
                 query: ""})
     }
-
+    changeRead(){
+        if(this.state.readIndex === 0) {
+            this.setState({readIndex: 1},()=>{
+                this.props.readToggle()
+            })
+        }
+        else if(this.state.readIndex === 1) {
+            this.setState({readIndex: 2},()=>{
+                this.props.readToggle()
+            })
+        }
+        else if(this.state.readIndex === 2) {
+            this.setState({readIndex: 0},()=>{
+                this.props.readToggle()
+            })
+        }
+    }
     search(){
         return(
             <div>
@@ -131,7 +149,7 @@ class Search extends React.Component{
                 })}
                 </div>
                 <br/><br/><br/>
-                <a><span className="unread-read">Unread & Read</span>
+                <a><span onClick = {this.changeRead.bind(this)} className="unread-read">{this.state.readCheck[this.state.readIndex]}</span>
                  <span className="down-arrow ui-icon ui-icon-carat-1-s"></span>
                 </a>
                 <div id = "dimmer">
