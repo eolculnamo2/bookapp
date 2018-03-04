@@ -251,53 +251,78 @@ class MyBook extends React.Component{
             })
         }
     }
+    shouldComponentUpdate(){
+        return true;
+    }
+    rate(rating,index){
+        var newRating = {
+            rating: rating
+        }
+        fetch("/rate"+index,{
+            method: "POST",
+            body: JSON.stringify(newRating),
+            headers: { "Content-Type": "application/json" }, 
+            credentials: "same-origin"
+        })
+        for(var j = 5-rating; j < 5; j++){           
+            document.getElementsByClassName("mybook-child-box")[index].querySelectorAll(".rating span")[j].innerHTML = "&#x2605";
+        }
+
+    }
     markOrRate(x,index){
-        
+    
         if(x){
             return(
                 <div>
-                    <form id ={"submitRate"+index} method = "POST" action = {"/rate"+index}>
-                    <input id = "ratingValue" name ="rating" type = "hidden" value = {this.state.rating}/>
                     <center>
                     <p className = "marked"> Marked as Read</p>
                     <div className ="rating">
 <span onClick = {()=>{this.setState({rating: 5},()=>{
-        //document.getElementById('ratingValue').value = 5;
-        document.getElementById('submitRate'+index).submit();
+        this.rate(this.state.rating,index);
     })
 }}>☆</span>
 <span onClick = {()=>{this.setState({rating: 4},()=>{
-        document.getElementById('submitRate'+index).submit();
-})
+       //document.getElementById('submitRate'+index).submit();
+       this.rate(this.state.rating,index);
+    })
 }}>☆</span>
 <span onClick = {()=>{this.setState({rating: 3},()=>{
-        document.getElementById('submitRate'+index).submit();
-})
+        //document.getElementById('submitRate'+index).submit();
+        this.rate(this.state.rating,index);
+    })
 }}>☆</span>
 <span onClick = {()=>{this.setState({rating: 2},()=>{
-        document.getElementById('submitRate'+index).submit();
-})
+       // document.getElementById('submitRate'+index).submit();
+       this.rate(this.state.rating,index);
+    })
 }}>☆</span>
 <span onClick = {()=>{this.setState({rating: 1},()=>{
-        document.getElementById('submitRate'+index).submit();
-})
+       // document.getElementById('submitRate'+index).submit();
+       this.rate(this.state.rating,index);
+    })
 }}>☆</span>
 </div>
 </center>
-                        </form>
-                    </div>
+        </div>
             )
         }
         else if(!x){
             return(
             <div>
-            <form method = "POST" action = {"/markRead"+index}>
-                <button className = "mark-button">
+            <button className = "mark-button" onClick={()=>{ 
+                    fetch("/markRead"+index,{
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" }, 
+                        credentials: "same-origin"
+                    })
+                    var rates=this.state.ifRead;
+                    rates[index]=true;
+                    this.setState({ifRead:rates})
+                }}>
                     Mark as Read
                      </button>
-                </form>
                 </div>
-            )
+            ) 
         }
     }
     bookTemplate(x,i){

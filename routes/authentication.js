@@ -112,6 +112,7 @@ router.post("/markRead:str",(req,res)=>{
 })
 
 router.post("/rate:str",(req,res)=>{
+  console.log("called"+req.body.rating)
   var index = req.params.str;
   User.findOne({username: req.user.username}, (err,response)=>{
     var updated = response.books;
@@ -160,14 +161,32 @@ router.post("/addNewBook", (req,res)=>{
     audibleURL: "",
     rating: 0
   }
-  
-  User.findOneAndUpdate({username: req.user.username},{$push: {books: newBook, categories: importedCat, tags: importedTags, recommended: importedRecommendedBy}},{new: true},(err,result)=>{
-    console.log("updated "+req.user.username+" recs "+ importedTags + " tags " + importedRecommendedBy);
-    if(err){
-      throw err;
-    }
-    res.redirect("/");
+
+  User.findOne({username: req.user.username},(err,response)=>{
+    var bookArray = response.books;
+    var catArray = response.categories
+    var tagArray = response.tags
+    var recArray = response.recommended
+    catArray.unshift(importedCat)
+    tagArray.unshift(importedTags)
+    recArray.unshift(importedRecommendedBy)
+    bookArray.unshift(newBook);
+    console.log(bookArray)
+
+    User.findOneAndUpdate({username: req.user.username},{$set: {books: bookArray,
+                                                                categories: catArray,
+                                                                tags: tagArray,
+                                                                recommended: recArray}},{new: true},(err,result)=>{
+      console.log("updated "+req.user.username+" recs "+ importedTags + " tags " + importedRecommendedBy);
+      if(err){
+        throw err;
+      }
+      res.redirect("/");
   })
+
+  })
+  
+  
 })
 
 
