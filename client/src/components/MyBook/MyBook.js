@@ -377,12 +377,14 @@ class MyBook extends React.Component{
 
                  <div className = "read-or-stars"> 
                      {this.markOrRate(this.state.ifRead[i], i)}<br/>
+                     <a target = "_blank" href = {"https://www.audible.com/search/ref=a_hp_tseft?advsearchKeywords="+this.state.titles[i]+" "+this.state.authors[i]+"&filterby=field-keywords"}>
                          <p className = "book-link">
                              Audible
-                             </p>
+                             </p></a>
+                             <a target = "_blank" href ={"https://www.amazon.com/s/ref=nb_sb_noss_2/135-4088136-4578661?url=search-alias%3Dstripbooks&field-keywords="+this.state.authors[i]+" "+this.state.titles[i]}>
                              <p className = "book-link">
                              Amazon
-                             </p>
+                             </p></a>
                              
                      </div>
                 </div>
