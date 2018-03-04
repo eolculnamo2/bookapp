@@ -5,12 +5,14 @@ import './MyBook.css';
 function filter(fil1,fil2,fil3,list1,list2,list3){
     var lock = [false,false,false];
     if(fil1.length>0){
+        var testArr = []
         fil1.forEach((x)=>{
-            var testArr = []
             list1.forEach((y)=>{
-                if(x == y){
-                    testArr.push("1")
-                }
+                y.split(",").forEach((z)=>{
+                    if(x == z){
+                        testArr.push("1")
+                    }
+                })
             })
             if(testArr.length == fil1.length){
                 lock[0] = true;
@@ -19,12 +21,14 @@ function filter(fil1,fil2,fil3,list1,list2,list3){
     }
     
     if(fil2.length>0){
+        var testArr = []
         fil2.forEach((x)=>{
-            var testArr = []
             list2.forEach((y)=>{
-                if(x == y){
-                    testArr.push("1")
-                }
+                y.split(",").forEach((z)=>{
+                    if(x == z){
+                        testArr.push("1")
+                    }
+                })
             })
             if(testArr.length == fil2.length){
                 lock[1] = true;
@@ -33,12 +37,14 @@ function filter(fil1,fil2,fil3,list1,list2,list3){
     }
 
     if(fil3.length>0){
+        var testArr = [];
         fil3.forEach((x)=>{
-            var testArr = [];
             list3.forEach((y)=>{
-                if(x == y){
-                    testArr.push("1")
-                }
+                y.split(",").forEach((z)=>{
+                    if(x == z){
+                        testArr.push("1")
+                    }
+                })
             })
             if(testArr.length == fil3.length){
                 lock[2] = true;
@@ -90,7 +96,7 @@ class MyBook extends React.Component{
       
     }
     componentDidMount(){
-        console.log(window.innerWidth)
+       
       fetch("/bookData",
         {
             method: "get",

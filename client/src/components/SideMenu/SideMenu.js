@@ -26,71 +26,73 @@ class SideMenu extends React.Component{
             return response.json();
         })
         .then((data)=>{
-    
-            data.categories.forEach((x)=>{
-                var filterOurMultiples = JSON.stringify(x).split(",").length;
-                if(filterOurMultiples === 1){
-                x.forEach((y)=>{
-                    var checker = true;
-                    this.state.categories.forEach((z)=>{
-                        if(y == z){
-                            
-                            checker = false;
-                        }
-                    })
-                    if(checker){
-                        var update = this.state.categories
-                        update.push(y)
-                        this.setState({categories: update})
-                    }
-                }) 
-            }
-            })
-            //End Categories
-            data.tags.forEach((x)=>{
-                var filterOurMultiples = JSON.stringify(x).split(",").length;
-                if(filterOurMultiples === 1){
-                x.forEach((y)=>{
-                    var checker = true;
-                    this.state.tags.forEach((z)=>{
-                        if(y == z){
-                            
-                            checker = false;
-                        }
-                    })
-                    if(checker){
-                        var update = this.state.tags
-                        update.push(y)
-                        this.setState({tags: update})
-                    }
-                }) 
-            }
-            })
-            //End Tags
-            data.recommended.forEach((x)=>{
-                var filterOurMultiples = JSON.stringify(x).split(",").length;
-                if(filterOurMultiples === 1){
-                x.forEach((y)=>{
-                    var checker = true;
-                    this.state.recommendedBy.forEach((z)=>{
-                        if(y == z){
-                            
-                            checker = false;
-                        }
-                    })
-                    if(checker){
-                        var update = this.state.recommendedBy
-                        update.push(y)
-                        this.setState({recommendedBy: update})
-                    }
-                })
-            } 
-            })
-        })
-    }
-    handleFilterCallback(e){
+            // first task is to fully separate string data into arrays if more than one filter
 
-        this.props.filter(e.target.id, e.target.innerHTML);
+            var splitCats = [];
+            var splitRecs = [];
+            var splitTags = [];
+            var filters = [data.categories,data.recommended,data.tags]
+            var stateFilters = [this.state.categories, this.state.recommendedBy,this.state.tags]
+            var newFilters = [splitCats,splitRecs,splitTags]
+
+            //for statement ends in approximately 50 lines and is commented
+            for(var i = 0; i<filters.length; i++){
+            filters[i].forEach((x)=>{
+        
+                    x.forEach((y)=>{
+                        var ySplit = y.split(",")
+                        if(ySplit.length > 0){
+                            ySplit.forEach((z)=>{
+                                newFilters[i].push([z])
+                            })
+                        }
+                        else{
+                            newFilters[i].push(y)
+                        }       
+                    })
+            })
+
+         
+        //check for duplicates for each
+            newFilters[i].forEach((x)=>{
+                var filterOurMultiples = JSON.stringify(x).split(",").length;
+                if(filterOurMultiples === 1){
+                x.forEach((y)=>{
+                    
+                    var checker = true;
+                    stateFilters[i].forEach((z)=>{
+                        if(y == z){
+                            
+                            checker = false;
+                        }
+                    })
+                    if(checker){
+                    
+                        if(i === 0){
+                            var update = this.state.categories;
+                            update.push(y);
+                            this.setState({categories: update}) 
+                        }
+                        else if(i === 1){
+                            var update = this.state.recommendedBy;
+                            update.push(y);
+                            this.setState({recommendedBy: update})
+                        }
+                        else if(i === 2){
+                            var update = this.state.tags;
+                            update.push(y);
+                            this.setState({tags: update})
+                        }
+                     
+                    } //End checker if
+                }) // End y forEach 
+                } //End Filteroutmultiples if statement
+            }) // End x forEach
+            } //Ends For Loop
+        })
+    
+    } // End componentDidMount
+    handleFilterCallback(e){
 
         //Toggle checkmark.. currently only adds
         var checkMark = RegExp("✔");
@@ -105,6 +107,8 @@ class SideMenu extends React.Component{
             var targetNumbered = e.target.className.split(" ")[1]
             
             if(numberedItem == targetNumbered && filter.innerHTML == e.target.innerHTML){
+                //sends filter information
+                this.props.filter(e.target.id, e.target.innerHTML);
                 e.target.innerHTML += " &#10004;";
             }
         }
@@ -121,10 +125,8 @@ class SideMenu extends React.Component{
         for(var filter of filters){
             var test = checkMark.test(filter.innerHTML)
           
-            if(test === true){
-                
+            if(test === true){         
                 filter.innerHTML = filter.innerHTML.slice(0,filter.innerHTML.length-2)
-               
             }
         }
        
