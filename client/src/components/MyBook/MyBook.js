@@ -369,16 +369,40 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
                             Categories
                             </h4>
                                 {this.state.categories[i].map((x)=>{
-                                    return <p className ="listed-organized-by">{x}</p>
+                                    var tester;
+                                    if(x === ""){
+                                        tester = "No Categories"
+                                        return <p className ="not-listed-organized-by">{tester}</p>
+                                    }
+                                    else{
+                                        tester = x
+                                        return <p className ="listed-organized-by">{tester}</p>
+                                    }
+                                   
                                 })} 
                                 <br/>
 
                          <h4 className = "organized-by">
                              Recommended By
                              </h4>
-                             <span className ="listed-organized-by">
-                                 {this.state.recommendedBy[i]}
-                                 </span>
+                            
+                                 {this.state.recommendedBy[i].map((x)=>{
+                                     var tester;
+                                     if(x === ""){
+                                         tester = "Not Recommended"
+                                         return <span className ="not-listed-organized-by">
+                                     {tester}
+                                     </span>
+                                     }
+                                     else{
+                                         tester = x
+                                         return <span className ="listed-organized-by">
+                                     {tester}
+                                     </span>
+                                     }
+                                     
+                                 })}
+                                 
                                  <br/>
                          <h4 className = "organized-by">
                              Tags
@@ -387,14 +411,17 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
                                      var tester;
                                     
                                      if(x === ""){
-                                         tester = "no tag";
+                                         tester = "No Tags";
+                                         return <span className ="not-listed-organized-by">
+                                         {tester}
+                                         </span>
                                      }
                                      else{
                                          tester = x
+                                         return <span className ="listed-organized-by">
+                                         {tester}
+                                         </span>
                                      }
-                                     return <span className ="listed-organized-by">
-                                     {tester}
-                                     </span>
                                  })}
                                  
                         </div>

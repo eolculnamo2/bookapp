@@ -32,6 +32,12 @@
         font-size: 15px;
     }
 
+    .not-listed-organized-by{
+        color: grey;
+        margin: 5px;
+        display: inline-block;
+        font-size: 15px;
+    }
     .listed-organized-by{
         color: #529179;
         margin: 5px;
@@ -119,6 +125,12 @@
 .organized-by{
     margin: 5px;
     font-weight: normal;
+    display: inline-block;
+    font-size: 15px;
+}
+.not-listed-organized-by{
+    color: grey;
+    margin: 5px;
     display: inline-block;
     font-size: 15px;
 }
