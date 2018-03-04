@@ -59,94 +59,72 @@ class Adding extends React.Component{
                 a duplicate is found, the checker function will go to false and the update will not be pushed
                 to the existing[filter] state.
             */
-            data.categories.forEach((x,i)=>{
-                var filterOurMultiples = JSON.stringify(x).split(",").length;
-                if(filterOurMultiples === 1){
-                x.forEach((y)=>{
-                    var checker = true;
-                    this.state.existingCategories.forEach((z)=>{
-                        if(y == z){
-                            
-                            checker = false;
-                        }
-                    })
-                    if(checker){
-                        var update = this.state.existingCategories
-                        update.push(y)
-                        this.setState({existingCategories: update,
-                                       checkCategories: Array(update.length).fill(false)})
-                    }
-                })
-            } 
-            })
-            //End Categories
-            data.tags.forEach((x)=>{
-                var filterOurMultiples = JSON.stringify(x).split(",").length;
-                if(filterOurMultiples === 1){
-                x.forEach((y)=>{
-                    var checker = true;
-                    this.state.existingTags.forEach((z)=>{
-                        if(y == z){
-                            
-                            checker = false;
-                        }
-                    })
-                    if(checker){
-                        var update = this.state.existingTags
-                        update.push(y)
-                        this.setState({existingTags: update,
-                                       checkTags: Array(update.length).fill(false)})
-                    }
-                }) 
-            }
-            })
-            //End Tags
-            data.recommended.forEach((x)=>{
-                var filterOurMultiples = JSON.stringify(x).split(",").length;
-                if(filterOurMultiples === 1){
-                x.forEach((y)=>{
-                    var checker = true;
-                    this.state.existingRecommended.forEach((z)=>{
-                        if(y == z){
-                            
-                            checker = false;
-                        }
-                    })
-                    if(checker){
-                        var update = this.state.existingRecommended
-                        update.push(y)
-                        this.setState({existingRecommended: update,
-                                       checkRecommended: Array(update.length).fill(false)})
-                    }
-                })
-            } 
-            })
-        })
-        //end fetch request
 
-        //form submit event listener
-        /*
-        var form = document.getElementById('send-to-db');
-        form.addEventListener("submit",
-    
-        this.handleSubmit(
-            this.props.title,
-            this.props.author,
-            this.props.image,
-            this.state.category,
-            this.state.newRecommended,
-            this.state.newTags)
-           
-            )       
-            */
+            var splitCats = [];
+            var splitRecs = [];
+            var splitTags = [];
+            var filters = [data.categories,data.recommended,data.tags]
+            var stateFilters = [this.state.existingCategories, this.state.existingRecommended,this.state.existingTags]
+            var newFilters = [splitCats,splitRecs,splitTags]
 
-           // document.getElementById("adder").addEventListener("click",
-        
+            //for statement ends in approximately 50 lines and is commented
+            for(var i = 0; i<filters.length; i++){
+                filters[i].forEach((x)=>{
             
-               
-            //    )
-
-               
+                        x.forEach((y)=>{
+                            var ySplit = y.split(",")
+                            if(ySplit.length > 0){
+                                ySplit.forEach((z)=>{
+                                    newFilters[i].push([z])
+                                })
+                            }
+                            else{
+                                newFilters[i].push(y)
+                            }       
+                        })
+                })
+    
+             
+            //check for duplicates for each
+                newFilters[i].forEach((x)=>{
+                    var filterOurMultiples = JSON.stringify(x).split(",").length;
+                    if(filterOurMultiples === 1){
+                    x.forEach((y)=>{
+                        
+                        var checker = true;
+                        stateFilters[i].forEach((z)=>{
+                            if(y == z){
+                                
+                                checker = false;
+                            }
+                        })
+                        if(checker){
+                        
+                            if(i === 0){
+                                var update = this.state.existingCategories;
+                                update.push(y);
+                                this.setState({existingCategories: update, 
+                                              checkCategories: Array(update.length).fill(false)}) 
+                            }
+                            else if(i === 1){
+                                var update = this.state.existingRecommended;
+                                update.push(y);
+                                this.setState({existingRecommended: update,
+                                               checkRecommended: Array(update.length).fill(false)})
+                            }
+                            else if(i === 2){
+                                var update = this.state.existingTags;
+                                update.push(y);
+                                this.setState({existingTags: update,
+                                               checkTags: Array(update.length).fill(false)})
+                            }
+                         
+                        } //End checker if
+                    }) // End y forEach 
+                    } //End Filteroutmultiples if statement
+                }) // End x forEach
+                } //Ends For Loop
+        })               
         //Event Listeners => Event listeners control the background color. The css dropdown is a 
         //separate hover effect in the css file
         document.getElementById("newCat").addEventListener("mouseover",()=>{
