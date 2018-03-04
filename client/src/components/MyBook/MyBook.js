@@ -264,9 +264,12 @@ class MyBook extends React.Component{
             headers: { "Content-Type": "application/json" }, 
             credentials: "same-origin"
         })
-        for(var j = 5-rating; j < 5; j++){           
-            document.getElementsByClassName("mybook-child-box")[index].querySelectorAll(".rating span")[j].innerHTML = "&#x2605";
-        }
+        var raters = this.state.ratings;
+        raters[index] = rating
+        this.setState({ratings: raters})
+        //for(var j = 5-rating; j < 5; j++){           
+         //   document.getElementsByClassName("mybook-child-box")[index].querySelectorAll(".rating span")[j].innerHTML = "&#x2605";
+       // }
 
     }
     markOrRate(x,index){
