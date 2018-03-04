@@ -66,6 +66,7 @@
 }
 .corner-box{
     text-align: center;
+    padding: 20px 15px 20px 5px;
     top: 0;
     left: 0;
     background-color: #529179;
