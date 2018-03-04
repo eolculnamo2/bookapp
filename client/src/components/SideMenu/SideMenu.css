@@ -1,7 +1,6 @@
 
 .corner-box{
     text-align: center;
-    padding: 20px 15px 20px 5px;
     top: 0;
     left: 0;
     background-color: #529179;
@@ -11,9 +10,9 @@
 }
 .mobile-menu{
     cursor: pointer;
-    margin: 0 10px 0 10px;
-    display: block;
-    width: 50px;
+    padding: 10px 10px;
+    float: left;
+    width: 25px;
 }
 .book-header{
     margin-left: 10%;
@@ -50,8 +49,9 @@
         left: 0;
     }
     .corner-state-text{
+        display: inline-block;
         margin: 0;
-        padding: 0 0 10px 0;
+        padding: 20px 0;
     }
 }
 
