@@ -232,7 +232,8 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
         //update read or unread filter
         this.setState({readCheck: newProps.readCheckFilter})
 
-        if(newProps.newBook.author.length > 0){
+        if(newProps.newBook.author.length > 0 && newProps.newBook.title !== this.state.titles[0]){
+            alert(newProps.newBook.title+" "+this.state.titles[this.state.titles.length-1]+" "+this.state.titles[0])
             //import object and assign variables
             var newAuth = newProps.newBook.author;
             var newImg = newProps.newBook.image;
@@ -258,7 +259,13 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
             //ifRead
             var rating = this.state.ratings;
             rating.push(0);
-        
+            var checker = true;
+            this.state.titles.forEach((x)=>{
+                if(x===newProps.newBook.title){
+                     checker = false;
+                }
+            }, ()=>{
+                if(checker){
             this.setState({
                 authors: authors,
                 images: images,
@@ -271,6 +278,8 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
             },()=>{
                 this.reloadStars();
             })
+        }
+        });
         }
     }
     shouldComponentUpdate(){
