@@ -90,6 +90,7 @@ class MyBook extends React.Component{
             recFilter: [],
             tagFilter: [],
             readCheck: 0,
+            noBooks: false,
             pass: false,
             lock: [true,true,true],
             rating: 0
@@ -148,6 +149,9 @@ class MyBook extends React.Component{
                 ifRead: ifReadHold,
                 ratings: ratingsHold
             },()=>{
+                if(this.state.titles.length == 0){
+                    this.setState({noBooks: true})
+                }
                 //sets star rating from fetch request
            
                this.state.ratings.forEach((r,i)=>{
@@ -495,10 +499,10 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
 
     }
     render(){
-        if(this.state.titles.length > 0){
+        if(!this.state.noBooks){
             return this.filtering()
         }
-        else{
+        else if(this.state.noBooks){
             return(
                 <div className="no-books">
                     <h1>
