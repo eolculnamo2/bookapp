@@ -237,6 +237,7 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
         this.setState({readCheck: newProps.readCheckFilter})
 
         if(newProps.newBook.author.length > 0 && newProps.newBook.title !== this.state.titles[0]){
+
             //import object and assign variables
             var newAuth = newProps.newBook.author;
             var newImg = newProps.newBook.image;
@@ -277,7 +278,8 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
                 recommendedBy: recommendedBy,
                 tags: tags,
                 ifRead: read,
-                ratings: rating
+                ratings: rating,
+                noBooks: false
             },()=>{
                 this.reloadStars();
             })
