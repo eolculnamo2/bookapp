@@ -1,5 +1,22 @@
 
- @media screen and (max-width: 1100px){
+.no-books{
+    background-color: #f9f9f9;
+    height: 100%;
+    width: 100%;
+    padding: 100px;
+    text-align: center;
+    color: #333;
+    margin: 5%;
+    border-radius: 5px;
+    font-style: "Trebuchet MS";
+}
+
+@media screen and (max-width: 1100px){
+    .no-books{
+        position: relative;
+        width: 60vw;
+        margin: auto;
+    }
     .mybook-box{
         margin-top: 5%;
         display: block;

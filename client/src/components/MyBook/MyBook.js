@@ -233,7 +233,6 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
         this.setState({readCheck: newProps.readCheckFilter})
 
         if(newProps.newBook.author.length > 0 && newProps.newBook.title !== this.state.titles[0]){
-            alert(newProps.newBook.title+" "+this.state.titles[this.state.titles.length-1]+" "+this.state.titles[0])
             //import object and assign variables
             var newAuth = newProps.newBook.author;
             var newImg = newProps.newBook.image;
@@ -496,7 +495,22 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
 
     }
     render(){
-        return this.filtering()
+        if(this.state.titles.length > 0){
+            return this.filtering()
+        }
+        else{
+            return(
+                <div className="no-books">
+                    <h1>
+                        You Have No Saved Books
+                        </h1>
+                    <h3>
+                        Type a Book Name into the Search Field <br/> and Hit the Enter Key
+                        </h3>
+                    </div>
+            )
+        }
+        
     }
 }
 

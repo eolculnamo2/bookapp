@@ -43,7 +43,13 @@ class LoginScreen extends React.Component{
     credentials(){
         return(
             <div>
-                <div id = "login-header"></div>
+                <div id = "login-header">
+                <center>
+                    <h1>
+                        Recommended Books
+                        </h1>
+                    </center>
+                </div>
                 <center>
             <div className = "cred-box">
             <div className = "box-header-and-footer"></div>
@@ -76,7 +82,13 @@ class LoginScreen extends React.Component{
     register(){
         return(
         <div>
-            <div id = "login-header"></div>
+            <div id = "login-header">
+                <center>
+                    <h1>
+                        Recommended Books
+                        </h1>
+                    </center>
+            </div>
             <center>
             <div className = "cred-box">
             <div className = "box-header-and-footer"></div>
