@@ -278,9 +278,11 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
                 recommendedBy: recommendedBy,
                 tags: tags,
                 ifRead: read,
-                ratings: rating,
-                noBooks: false
+                ratings: rating
             },()=>{
+                if(this.state.titles.length > 0){
+                    this.setState({noBooks: false})
+                }
                 this.reloadStars();
             })
         }
