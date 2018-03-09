@@ -202,7 +202,7 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
         })
     }
     componentWillReceiveProps(newProps){
-       
+       this.setState({noBooks: false})
         if(newProps.catFilter !== undefined){
     
              this.setState({catFilter: newProps.catFilter,
