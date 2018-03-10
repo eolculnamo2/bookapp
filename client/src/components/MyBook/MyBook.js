@@ -385,6 +385,7 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
                             Categories
                             </h4>
                                 {this.state.categories[i].map((x)=>{
+                                    
                                     var tester;
                                     if(x === ""){
                                         tester = "No Categories"
@@ -463,7 +464,7 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
 
     
                {this.state.titles.map((x,i)=>{
-            
+                
                     var y =  filter(this.state.catFilter,
                                     this.state.recFilter,
                                     this.state.tagFilter,
@@ -494,8 +495,6 @@ document.getElementsByClassName("mybook-child-box")[i].querySelectorAll(".rating
                                 }
                         }
                     }
-                 
-                   
                    
                })}
                </div>
