@@ -210,6 +210,12 @@
     position: relative;
     width: 1.1em;
   }
+  .rating > span:active{
+    animation-name: selectStar;
+    animation-duration: .5s;
+    animation-fill-mode: both;
+    animation-iteration-count: 1;
+  }
   .rating > span:hover:before,
   .rating > span:hover ~ span:before {
      content: "\2605";
@@ -221,3 +227,7 @@
       to{transform: translate(0px)}
   }
 }
+    @keyframes selectStar {
+        from{transform: scale(1)}
+        to{transform: scale(3)}
+    }
