@@ -36,12 +36,14 @@
     #hide-if-mobile{
     top: 0;
     display: none;
-    position: fixed;
+    position: absolute;
     background-color: white;
     width: 80vw;
     border: 2px solid black;
     padding: 10px;
     z-index: 5;
+    animation-name: slideOut;
+    animation-duration: .5s;
     }
     .corner-box{
         padding: 0;
@@ -52,6 +54,14 @@
         display: inline-block;
         margin: 0;
         padding: 20px 0;
+    }
+    @keyframes slideOut{
+        from{transform: translate(-200px)}
+        to{transform: translate(0)}
+    }
+    @keyframes slideIn{
+        from{transform: translate(0)}
+        to{transform: translate(-300px)}
     }
 }
 

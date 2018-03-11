@@ -34,6 +34,8 @@
         border-left: 2px solid #f2f2f2;
         border-right: 2px solid #f2f2f2;
         border-bottom: 4px solid #f2f2f2;
+        animation-name: slideUp;
+        animation-duration: .5s;
     }
     
     .my-image{
@@ -110,6 +112,10 @@
     .read-or-stars{
         margin: auto;
         text-align: center;
+    }
+    @keyframes slideUp{
+        from{transform: translateY(100px)}
+        to{transform: translateY(0)}
     }
     
 }  
