@@ -44,11 +44,9 @@ class LoginScreen extends React.Component{
         return(
             <div>
                 <div id = "login-header">
-                <center>
                     <h1>
                         Recommended Books
                         </h1>
-                    </center>
                 </div>
                 <center>
             <div className = "cred-box">
